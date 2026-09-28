@@ -78,8 +78,19 @@ PlayMCP 연결 자체가 처음이면 [PlayMCP 연결 안내](https://github.com
 
 | 순서 | 할 일 | 이렇게 되면 성공 |
 |---|---|---|
-| **1** | `https://github.com/tae0y/real-estate-mcp` → 초록 **`Code`** → **`Download ZIP`** | zip 파일 |
-| **2** | 압축을 풀고 폴더 이름을 **`real-estate-mcp`** 로 바꿔 `C:\AI\mcp\` 안에 둠 | `C:\AI\mcp\real-estate-mcp\pyproject.toml` 이 보임 |
+| **1** | `https://github.com/tae0y/real-estate-mcp` → 오른쪽 위 초록 **`<> Code`** 버튼 → 창 맨 아래 **`Download ZIP`** | 다운로드 폴더에 `real-estate-mcp-main.zip` |
+| **2** | zip 에 오른쪽 클릭 → **`모두 압축 풀기`** | `real-estate-mcp-main` 폴더가 생김 |
+| **3** | 폴더 이름 끝의 **`-main` 을 지워** `real-estate-mcp` 로 바꿈 | |
+| **4** | 그 폴더를 `C:\AI\mcp\` 안으로 옮김 | `C:\AI\mcp\real-estate-mcp\` 를 열면 **바로** `pyproject.toml` 과 `src` 폴더가 보임 |
+
+> [!WARNING]
+> **여기서 많이 막힙니다 — 폴더가 두 겹이 되는 경우.** 압축을 풀면 아래처럼 한 겹이 더 생기기도 합니다.
+> ```
+> C:\AI\mcp\real-estate-mcp\real-estate-mcp-main\pyproject.toml   ← 틀림
+> C:\AI\mcp\real-estate-mcp\pyproject.toml                         ← 맞음
+> ```
+> 이러면 설정 파일의 경로와 맞지 않아 **연결되지 않습니다.** 안쪽 폴더를 꺼내 `C:\AI\mcp\` 에 두고 이름을 `real-estate-mcp` 로 바꾸세요.
+> 화면에 보이는 폴더·파일을 하나씩 받을 필요는 없습니다. **ZIP 하나면 됩니다.**
 
 **설정 파일에 넣기** — `"real-estate"` 블록의 `<<여기에_공공데이터포털_일반인증키_Decoding_입력>>` 을 키로 바꿉니다.
 
@@ -104,8 +115,13 @@ PlayMCP 연결 자체가 처음이면 [PlayMCP 연결 안내](https://github.com
 
 | 순서 | 할 일 | 이렇게 되면 성공 |
 |---|---|---|
-| **1** | `https://github.com/dgkim3333-hash/claude-guide-kr` → 초록 **`Code`** → **`Download ZIP`** | zip 파일 (④에도 같은 파일을 씁니다) |
-| **2** | 압축을 풀고 `경매물건분석\mcp\vworld-landuse-mcp` 폴더를 **통째로** `C:\AI\mcp\` 안에 복사 | `C:\AI\mcp\vworld-landuse-mcp\vworld_landuse_mcp.py` 가 보임 |
+| **1** | `https://github.com/dgkim3333-hash/claude-guide-kr` → 오른쪽 위 초록 **`<> Code`** 버튼 → 창 맨 아래 **`Download ZIP`** | 다운로드 폴더에 `claude-guide-kr-main.zip` (④에도 같은 파일을 씁니다) |
+| **2** | zip 에 오른쪽 클릭 → **`모두 압축 풀기`** | `claude-guide-kr-main` 폴더가 생김 |
+| **3** | 그 안의 `경매물건분석` → `mcp` 로 들어가 **`vworld-landuse-mcp` 폴더를 통째로** `C:\AI\mcp\` 안에 복사 | `C:\AI\mcp\vworld-landuse-mcp\` 를 열면 **바로** `vworld_landuse_mcp.py` 가 보임 |
+
+> [!WARNING]
+> **폴더가 두 겹이 되지 않게 하세요.** `C:\AI\mcp\vworld-landuse-mcp\vworld-landuse-mcp\…` 처럼 한 겹이 더 있으면 연결되지 않습니다.
+> 이 폴더는 이름을 바꾸지 않습니다. `-main` 이 붙는 것은 바깥 zip 폴더(`claude-guide-kr-main`)뿐입니다.
 
 **설정 파일에 넣기** — `"vworld-landuse"` 블록의 `<<여기에_브이월드_인증키_입력>>` 을 키로 바꿉니다.
 
@@ -127,7 +143,7 @@ PlayMCP 연결 자체가 처음이면 [PlayMCP 연결 안내](https://github.com
 
 | 순서 | 할 일 | 이렇게 되면 성공 |
 |---|---|---|
-| **1** | ⑤에서 받은 claude-guide-kr zip 에서 `경매물건분석\mcp\datagokr-mcp` 폴더를 **통째로** `C:\AI\mcp\` 안에 복사 | `C:\AI\mcp\datagokr-mcp\server.py` 가 보임 |
+| **1** | ⑤에서 압축을 푼 `claude-guide-kr-main` → `경매물건분석` → `mcp` 에서 **`datagokr-mcp` 폴더를 통째로** `C:\AI\mcp\` 안에 복사 (두 겹 주의) | `C:\AI\mcp\datagokr-mcp\` 를 열면 **바로** `server.py` 가 보임 |
 | **2** | 명령어 창(검은 창)을 열고 아래 두 줄을 **한 줄씩** 실행 | 마지막에 오류 없이 끝남 (처음엔 몇 분 걸림) |
 
 ```
@@ -172,6 +188,7 @@ uv sync
 |---|---|---|
 | 도구가 **전부** 안 보인다 | 설정 파일 문법 오류(콤마·따옴표) | 백업으로 되돌리고 4개 블록을 다시 붙이기 |
 | 한 서버만 안 보인다 | 폴더 경로나 폴더 이름이 다름 | `C:\AI\mcp\` 안의 폴더 이름이 설정의 경로와 같은지 |
+| real-estate 만 안 붙는다 | 폴더 이름에 `-main` 이 남음 · 폴더가 두 겹 | `C:\AI\mcp\real-estate-mcp\pyproject.toml` 이 바로 보이게 정리 |
 | 「키가 없다」 · 「인증 실패」 | `<< >>` 를 안 지웠거나 키 앞뒤 공백 | 값만 남기기 |
 | 실거래가·건축물대장이 **0건** | 해당 자료 **활용신청 안 함** / 승인 대기 | data.go.kr 마이페이지 → 활용신청 현황 |
 | `uv` 를 찾을 수 없다 | uv 미설치 | 0-1번 사전준비 |
