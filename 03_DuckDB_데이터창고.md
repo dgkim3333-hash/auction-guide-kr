@@ -219,6 +219,8 @@ C:\AI\실거래\ 폴더의 CSV를 모두 읽어 경매창고에 실거래_상업
 
 더 자세한 데이터 창고 구성(공시가격·건축물대장 등)은 [duckdb-realestate-kr](https://github.com/dgkim3333-hash/duckdb-realestate-kr) 을 보세요.
 
+**다음 단원 → [04. 경매·공매 분석 프로젝트 만들기](04_분석프로젝트.md)**
+
 ---
 
 출처
