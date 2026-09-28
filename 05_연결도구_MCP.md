@@ -252,6 +252,10 @@ powershell -ExecutionPolicy Bypass -File "C:\AI\mcp\키입력.ps1"
 
 ---
 
+**다음 단원 →** [06. 관심물건 자동 분석](06_관심물건_자동분석.md)
+
+---
+
 출처
 
 - claude-guide-kr/경매물건분석/mcp — datagokr-mcp · vworld-landuse-mcp 소스와 README (2026-09-28 조회)
