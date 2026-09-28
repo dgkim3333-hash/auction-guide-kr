@@ -1,0 +1,134 @@
+{
+  "mcpServers": {
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    },
+    "youtube-transcript": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@kimtaeyoon83/mcp-server-youtube-transcript"
+      ]
+    },
+    "context7": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest"
+      ]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest"
+      ]
+    },
+    "hwp-read": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "hwp-mcp@latest"
+      ]
+    },
+    "word": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "word-mcp-live",
+        "word_mcp_server.exe"
+      ],
+      "env": {
+        "MCP_AUTHOR": "Claude",
+        "MCP_AUTHOR_INITIALS": "C",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+      }
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "firecrawl-mcp@3.25.4"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "<<여기에_Firecrawl_키_입력__fc-로_시작합니다>>",
+        "FIRECRAWL_RETRY_MAX_ATTEMPTS": "5",
+        "FIRECRAWL_RETRY_INITIAL_DELAY": "2000",
+        "FIRECRAWL_RETRY_MAX_DELAY": "30000",
+        "FIRECRAWL_RETRY_BACKOFF_FACTOR": "3",
+        "FIRECRAWL_CREDIT_WARNING_THRESHOLD": "2000",
+        "FIRECRAWL_CREDIT_CRITICAL_THRESHOLD": "500"
+      }
+    },
+    "korean-law": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--ignore-scripts",
+        "--omit=optional",
+        "korean-law-mcp@latest"
+      ],
+      "env": {
+        "LAW_OC": "<<여기에_법령정보센터_OC_입력__이메일_아이디>>"
+      }
+    },
+    "real-estate": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "C:\\AI\\mcp\\real-estate-mcp",
+        "python",
+        "src/real_estate/mcp_server/server.py"
+      ],
+      "env": {
+        "DATA_GO_KR_API_KEY": "<<여기에_공공데이터포털_일반인증키_Decoding_입력>>",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+      }
+    },
+    "datagokr": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "C:\\AI\\mcp\\datagokr-mcp",
+        "run",
+        "python",
+        "server.py"
+      ],
+      "env": {
+        "DATA_GO_KR_SERVICE_KEY": "<<여기에_공공데이터포털_일반인증키_Decoding_입력>>",
+        "EPOST_SERVICE_KEY": "<<여기에_공공데이터포털_일반인증키_Decoding_입력>>",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+      }
+    },
+    "vworld-landuse": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "C:\\AI\\mcp\\vworld-landuse-mcp",
+        "python",
+        "vworld_landuse_mcp.py"
+      ],
+      "env": {
+        "VWORLD_API_KEY": "<<여기에_브이월드_인증키_입력>>",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONUTF8": "1"
+      }
+    }
+  }
+}
