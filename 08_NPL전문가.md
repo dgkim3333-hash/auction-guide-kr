@@ -23,6 +23,32 @@
 
 ---
 
+## 받는 법 — 저장소 전체를 ZIP 한 번으로
+
+GitHub 는 **폴더 하나만 골라 받는 기능이 없습니다.** 파일 103개를 하나씩 받지 말고 저장소 전체를 한 번에 받습니다. 2MB 남짓입니다.
+
+| 순서 | 할 일 | 이렇게 되면 성공 |
+|---|---|---|
+| **1** | 아래 주소를 연다 | 저장소 첫 화면 |
+| **2** | 초록색 **`<> Code`** 버튼 → **`Download ZIP`** | `auction-guide-kr-main.zip` 이 받아짐 |
+| **3** | 압축을 푼다 | `auction-guide-kr-main\` 폴더 안에 `NPL\` 이 보임 |
+| **4** | `auction-guide-kr-main\NPL\_템플릿\` 폴더를 `C:\AI\NPL\_템플릿\` 으로 복사 | 1절 폴더 구조 완성 |
+| **5** | `auction-guide-kr-main\NPL\skills_skill파일\` 의 `.skill` 25개를 4절대로 설치 | 스킬 목록에 25개 |
+| **6** | 나머지는 지워도 된다 | — |
+
+```
+https://github.com/dgkim3333-hash/auction-guide-kr
+```
+
+> [!TIP]
+> 스킬 하나만 다시 받을 때는 `NPL/skills_skill파일/` 에서 그 파일을 열고 오른쪽 위 **`Download raw file`**(↓ 아이콘) 을 누릅니다.
+> `.md` 문서는 **`Raw`** 로 열어 전체 복사하면 됩니다.
+
+> [!WARNING]
+> 강사가 저장소를 갱신하면 ZIP 을 다시 받아야 합니다. 스킬 첫머리 「수강생판 안내」의 날짜로 내 것이 최신인지 봅니다.
+
+---
+
 ## 1. 폴더 만들기 — `C:\AI\NPL`
 
 강사는 회사 OneDrive 폴더를 씁니다. 수강생은 **`C:\AI\NPL`** 하나로 통일합니다.
@@ -34,7 +60,8 @@ C:\AI\
  ├─ mcp\                          ← 05단원 MCP 소스 (그대로)
  └─ NPL\                          ← ★ 새로 만든다
      ├─ _템플릿\
-     │   └─ 물건폴더_표준\         ← 이 저장소 NPL\_템플릿\ 을 복사
+     │   ├─ 물건폴더_표준\         ← ZIP 의 NPL\_템플릿\ 을 복사
+     │   └─ NPL수익률_교육용.xlsx
      ├─ 00_시장데이터\             ← 비워 둔다. 낙찰 결과가 쌓이면 여기에
      └─ <소재지 전체주소>\         ← 물건 하나에 폴더 하나
          ├─ 00_물건카드.md
@@ -47,7 +74,7 @@ C:\AI\
 | 순서 | 할 일 |
 |---|---|
 | **1** | `C:\AI\NPL` 폴더를 만든다 |
-| **2** | 이 저장소의 [NPL/_템플릿/](NPL/_템플릿/물건폴더_표준/README_사용법.md) 폴더를 통째로 받아 `C:\AI\NPL\_템플릿\` 에 넣는다 |
+| **2** | ZIP 에서 푼 `NPL\_템플릿\` 폴더를 통째로 `C:\AI\NPL\_템플릿\` 에 넣는다 |
 | **3** | `C:\AI\NPL\00_시장데이터` 빈 폴더를 만든다 |
 
 ---
@@ -96,12 +123,14 @@ C:\AI\
 
 [NPL/skills/README.md](NPL/skills/README.md) 에 목록·설치법이 있습니다.
 
+**가장 쉬운 길** — ZIP 에서 푼 `NPL\skills_skill파일\` 의 **`.skill` 25개를 그대로** 데스크탑 앱에 올립니다. 압축을 풀지 않습니다.
+
 04단원 스킬(9개)과 **이름이 겹치는 것이 6개** 있습니다 — number-format-guard · pptx-blue-design-system · priority-payment-date-rule · residential-auction · onbid-api-caller · auction-property-card.
 **NPL 트랙 것으로 덮어쓰세요.** NPL판이 상위 호환입니다(원본 그대로라 내용이 더 많습니다). auction-analysis(경매종합분석)는 NPL판에 없고, `npl-analysis` 가 그 자리를 맡습니다.
 
 > [!WARNING]
 > 스킬 25개 중 **여러 파일로 된 것이 8개** 있습니다(npl-analysis · auction-bid-price · real-estate-tax-calculator · post-auction-eviction · post-auction-loan-simulator · npl-purchase-letter · corporate-debtor-bankruptcy-check · npl-doc-intake 등).
-> 이런 스킬은 「대화로 저장」이 안 됩니다. **폴더를 zip 으로 묶어 `.skill` 로 이름을 바꿔** 올립니다. 방법은 skills/README 에 있습니다.
+> 이런 스킬은 「대화로 저장」이 안 됩니다. 반드시 `.skill` 파일로 올립니다.
 
 ---
 
@@ -130,7 +159,7 @@ C:\AI\
 |---|---|---|
 | `NPL/_템플릿/물건폴더_표준/` | `C:\AI\NPL\_템플릿\물건폴더_표준\` | npl-doc-intake · npl-file-hygiene |
 | `NPL/_템플릿/NPL수익률_교육용.xlsx` | 물건 폴더 `02_분석\NPL수익률.xlsx` 로 복사해 씀 | npl-analysis · npl-excel-fill-map · npl-purchase-letter |
-| `NPL/skills/npl-purchase-letter/assets/purchase_letter_template.docx` | 스킬 안에 들어 있음 | npl-purchase-letter |
+| `NPL/skills/npl-purchase-letter/assets/purchase_letter_template.docx` | 스킬 안에 들어 있음 (`.skill` 에 포함) | npl-purchase-letter |
 
 **의향서 템플릿에는 회사명·법인번호·주소·연락처가 `[ ]` 로 비어 있습니다.** `npl-purchase-letter` 스킬 「고정 정보」 표에 본인 것을 채우세요.
 
@@ -201,6 +230,7 @@ NPL수익률 엑셀 채워줘. 빈칸 검사까지
 | 「ggi-collect 스킬 없음」 | 강사 전용 스킬 호출 | 정상. 그 줄은 건너뛴다 |
 | 계수가 낡았다는 경고 | 스냅샷 6개월 경과 | 정상. `[검증필요]` 로 두고 진행 |
 | 금액이 억·만으로 나온다 | 07 개인 설정 미입력 | [07단원](07_개인설정.md) |
+| `.skill` 을 올렸는데 안 보인다 | 압축을 풀어서 올림 / zip 안에 폴더가 두 겹 | 받은 `.skill` 파일 그대로 올린다 |
 
 ---
 
