@@ -145,7 +145,7 @@ python build_rows.py court_newlist_raw_YYYYMMDD.json --out court_newlist_YYYYMMD
 | 증상 | 원인 | 해결 |
 |---|---|---|
 | `[B]` 실행 후 `[C]` 가 `rows: 0` 그대로 | 물건상세검색 탭이 아님 · 로그인 만료 | STEP 1 다시, 로그인 후 재실행 |
-| `[D]` 에서 `FROM is not defined` | 블록을 따로 실행하면 `[B]` 의 const 가 사라진다 | 2026-09-30 판 collect.js 는 `window.__FROM/__TO` 를 쓴다. 예 판이면 갱신 |
+| `[D]` 에서 `FROM is not defined` | 블록을 따로 실행하면 `[B]` 의 const 가 사라진다 | 2026-09-30 판 collect.js 는 `window.__FROM/__TO` 를 쓴다. 이전 판이면 갱신 |
 | 표 생성이 `Invalid table name` | 한글 표 이름 | 영문 이름(`TBL_new`)으로 |
 | 「사용에 불편을 드려서 죄송합니다」 | pageSize 100 | 50 으로 |
 | JS 도구 타임아웃 | 한 호출에 45초 넘게 넣음 | 블록을 쪼갠다. 스크립트는 뒤에서 계속 돈다 — `[C]` 로 확인 |
