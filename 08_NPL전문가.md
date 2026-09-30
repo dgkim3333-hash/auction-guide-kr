@@ -22,7 +22,7 @@
 | 단원 | 이 트랙에서 쓰는 것 |
 |---|---|
 | [03. DuckDB 창고](03_DuckDB_데이터창고.md) | `C:\AI\경매창고.duckdb` — 실거래·건축물대장·공시가격·철도역. NPL 스킬 전부가 이 창고를 1순위로 본다 |
-| [05. 도구 연결](05_연결도구_MCP.md) | korean-law · real-estate · datagokr · vworld-landuse · KakaoMap · PlayMCP · duckdb. **Code 에도 등록해야 합니다** (5절) |
+| [05. 도구 연결](05_연결도구_MCP.md) | korean-law · real-estate · datagokr · vworld-landuse · KakaoMap · PlayMCP · duckdb. 설정 파일에 넣으면 Code 에도 자동으로 붙습니다 (5절) |
 | [07. 개인 설정](07_개인설정.md) | 전역 `%USERPROFILE%\.claude\CLAUDE.md` — 라벨 4종 · 금액 표기 · 금지 소스. NPL 지침은 이것을 **가리키기만** 한다 |
 
 > [!IMPORTANT]
@@ -166,18 +166,14 @@ ZIP 의 `NPL\skills\` 안에는 이미 **스킬 이름 폴더 25개**가 그 구
 
 ---
 
-## 5. MCP — Code 에 따로 등록한다
+## 5. MCP — 설정 파일 한 곳이면 Code 에도 붙는다
 
-Cowork 에서 `claude_desktop_config.json` 으로 붙이던 MCP 는 **Code 에 자동으로 넘어오지 않습니다.** [NPL/mcp/필요한MCP_NPL.md](NPL/mcp/필요한MCP_NPL.md) 의 표를 보고 하나씩 등록합니다 `[검증필요 — 05단원 Code 개정 예정. 그전까지는 아래 형식]`.
+`claude_desktop_config.json` 에 넣은 MCP 는 **Code 탭 로컬 세션에도 자동으로 붙습니다** `[확정 — code.claude.com/docs/en/desktop 2026-09-30 조회]`. 따로 등록할 것은 없고, 아직 안 넣은 서버를 [NPL/mcp/필요한MCP_NPL.md](NPL/mcp/필요한MCP_NPL.md) 의 표와 [NPL/mcp/claude_desktop_config_NPL.json](NPL/mcp/claude_desktop_config_NPL.json) 완성본대로 설정 파일에 더한 뒤(05단원 4절 방법) 앱을 재시작합니다.
 
-```
-claude mcp add --scope user <이름> -- <실행 명령>
-```
-
-등록 확인은 Code 세션에서:
+확인은 Code 세션에서:
 
 ```
-claude mcp list
+/mcp
 ```
 
 | 구분 | MCP | 어느 스킬이 쓰나 | 없으면 |
@@ -274,7 +270,7 @@ NPL수익률 엑셀 채워줘. 빈칸 검사까지
 | 파일 첫 줄이 ```` ```markdown ```` 이다 | 붙여넣을 때 바깥 펜스가 같이 들어감 | 첫 줄과 마지막 줄의 펜스만 지우고 저장 → 새 세션 |
 | 「C:\NPL 을 찾을 수 없다」 | 강사 원본 경로가 남은 스킬 | 그 스킬 폴더를 다시 복사. 이 저장소 것은 전부 `C:\AI\NPL` |
 | 「npl.duckdb 없음」 | 위와 같음 | 창고는 `C:\AI\경매창고.duckdb` |
-| 「창고 미조회」가 계속 나온다 | duckdb MCP 가 Code 에 등록 안 됨 | 5절 `claude mcp add` → `claude mcp list` 로 확인 |
+| 「창고 미조회」가 계속 나온다 | duckdb MCP 가 설정 파일에 없거나 앱 재시작 전 | 설정 파일 확인 → 앱 재시작 → `/mcp` |
 | 「○○ 스킬 없음」 | 폴더 이름이 스킬 이름과 다르거나 `SKILL.md` 가 없음 | 4절 — `%USERPROFILE%\.claude\skills\<스킬 이름>\SKILL.md` |
 | 같은 스킬이 두 번 뜬다 | `skills\` 안에 백업 폴더가 있음 | `skills_backup\` 으로 옮기기 |
 | 「NPL수익률.xlsx 없음」 | 템플릿을 물건 폴더에 안 넣음 | 6절 — `02_분석\NPL수익률.xlsx` 로 복사 |
