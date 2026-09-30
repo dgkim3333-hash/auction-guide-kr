@@ -76,6 +76,7 @@ window.__req = async function (cd, page, size, from, to) {
 // ─────────────────────────────────────────────────────────────
 /*
 const FROM = "20260929", TO = "20261231";   // ← 바꾼다
+window.__FROM = FROM; window.__TO = TO;      // [D] 가 따로 실행돼도 읽을 수 있게 window 에 둔다 [확정 — 2026-09-30 Code 실측: 없으면 ReferenceError]
 window.__R = { rows: [], prog: {}, fail: [], done: false, started: Date.now() };
 (async () => {
   for (const [cd, nm] of Object.entries(window.__COURTS)) {
@@ -114,9 +115,9 @@ const F = ["__court","jiwonNm","jpDeptNm","srnSaNo","saNo","maemulSer","printSt"
            "dspslUsgNm","lclsUtilCd","mclsUtilCd","sclsUtilCd","mokGbncd","gamevalAmt","minmaePrice",
            "yuchalCnt","maeGiil","mulBigo","inqCnt"];
 const slim = window.__R.rows.map(x => { const o = {}; F.forEach(k => o[k] = x[k]); return o; });
-const blob = new Blob([JSON.stringify({ meta: { from: FROM, to: TO, prog: window.__R.prog, fail: window.__R.fail,
+const blob = new Blob([JSON.stringify({ meta: { from: window.__FROM, to: window.__TO, prog: window.__R.prog, fail: window.__R.fail,
   savedAt: new Date().toISOString() }, rows: slim })], { type: 'application/json' });
 const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-a.download = 'court_newlist_raw_' + FROM + '.json'; document.body.appendChild(a); a.click(); a.remove();
+a.download = 'court_newlist_raw_' + window.__FROM + '.json'; document.body.appendChild(a); a.click(); a.remove();
 "downloaded " + slim.length + " rows";
 */
