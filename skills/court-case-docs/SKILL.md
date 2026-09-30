@@ -23,7 +23,7 @@ description: "법원경매정보(courtauction.go.kr, 무료)에서 사건번호 
 
 - 01단원 완료. `chrome://settings/content/automaticDownloads` 「허용됨」에 `https://www.courtauction.go.kr` — **없으면 두 번째 파일부터 조용히 사라진다** `[확정 — 2026-09-29 실측]`
 - 서류 공개 시점(사이트 「이용시 유의사항」 원문, 2026-09-29 조회): **매각물건명세서는 매각기일 1주 전부터, 현황조사서·감정평가서는 2주 전부터** 매각기일까지만 조회된다. 그 전에는 버튼이 없다 — 오류가 아니다.
-- `pip install weasyprint --break-system-packages` (실측 70.0), 폰트 `Noto Sans CJK KR`
+- `pip install weasyprint --break-system-packages` (실측 70.0), 폰트 `Noto Sans CJK KR`. **Windows 에는 GTK 가 없어 weasyprint 가 대개 안 깔린다** → 6단계 Edge 경로 `[확정 — 2026-09-30 Code 실측]`
 
 ## 어떤 서류가 어떻게 받아지나 `[확정 — 2026-09-29 실측]`
 
@@ -128,6 +128,19 @@ python html_to_pdf.py 문건송달내역.html 문건송달내역.pdf
 python html_to_pdf.py 현황조사서.html 현황조사서.pdf --images 현황조사_사진1.jpg 현황조사_사진2.jpg 현황조사_사진3.jpg
 ```
 
+**Windows(Claude Code 탭)** — weasyprint 가 없으면 Edge 로 만든다 `[확정 — 2026-09-30 Code 실측]`. HTML 첫 줄에 `<meta charset="utf-8">` 가 있어야 한글이 깨지지 않고, `--no-pdf-header-footer` 가 없으면 머리글에 주소·날짜가 찍힌다. PowerShell 한 줄씩:
+
+```
+& "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="사건내역.pdf" "사건내역.html"
+```
+```
+& "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="기일내역.pdf" "기일내역.html"
+```
+```
+& "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --headless --disable-gpu --no-pdf-header-footer --print-to-pdf="문건송달내역.pdf" "문건송달내역.html"
+```
+현황조사서 사진은 `html_to_pdf.py --images` 가 하던 base64 삽입을 HTML 에 직접 넣은 뒤 같은 명령으로 만든다. 경로는 절대경로로 준다.
+
 ### 7-0. 등기부등본 — 사람이 받는다 (로그인·캡차·결제는 대신하지 않는다)
 
 1. Claude: 사건내역 목록내역에서 **소재지 · 부동산 고유번호**를 뽑아 채팅에 적고, 필요한 등기부 종류를 말한다 — 집합건물(아파트·다세대·오피스텔·구분상가)은 집합건물 1통, 그 밖은 토지 + 건물 2통
@@ -154,6 +167,8 @@ python html_to_pdf.py 현황조사서.html 현황조사서.pdf --images 현황�
 | JS 타임아웃 | 한 호출 45초 초과 | 20초 이내로 쪼갠다. 파일은 생겼을 수 있으니 폴더 확인 |
 | 감정평가서 새 탭이 오류 페이지 | 주소창에 직접 입력(리퍼러 검사) | 법원경매정보 탭에서 `window.open` |
 | 감정평가서 저장 아이콘이 안 눌린다 | OS 저장 대화상자 | 아이콘 대신 PDF 주소 `fetch` (3단계) |
+| 감정평가서 팝업이 안 닫혀 다음 클릭이 막힌다 | `[id$="_close"]` 가 이 팝업엔 없다 `[확정 — 2026-09-30 Code 실측]` | 팝업 안 [닫기] 버튼을 `find`/`read_page` 로 찾아 누른다. 동작한 선택자는 `[검증필요]` — 실측 후 여기 적는다 |
+| `weasyprint` 가 없다 (Windows) | GTK 미설치 | 6단계 Edge 명령으로 |
 | 사건내역·문건송달이 txt 만 있다 | 6단계 생략 | `html_to_pdf.py` 로 PDF 3종까지 만든다 |
 | `input[type=button]` 을 못 찾는다 | `button` 으로 검색 | `title` 속성으로 |
 | 한글이 □ 로 나온다 | 폰트 없음 | `Noto Sans CJK KR` 설치 확인 |

@@ -22,7 +22,7 @@ court-newlist-collect / build_rows.py
   사건번호, 법원, 매각기일, 소재지, 용도, 감정가, 최저가, 최저가율, 건물면적, 토지면적, 조회수, 비고,
   시도, 시군구, 용도군, 감정가 규모대, 남은 날, 조회수 구간, 신규
 """
-import argparse, csv, json, re, sys
+import argparse, csv, json, os, re, sys
 from collections import defaultdict
 from datetime import date, datetime
 
@@ -185,7 +185,10 @@ def main():
     for r in rows: groups[(r.get("__court") or r.get("jiwonNm"), r.get("saNo"), str(r.get("maemulSer")))].append(r)
 
     known = set()
-    if a.master:
+    if a.master and not os.path.exists(a.master):
+        # 첫 회차에는 마스터가 아직 없다 [확정 — 2026-09-30 Code 실측: 가드 없이 열면 FileNotFoundError]. 전부 「신규」로 간다
+        print("마스터 없음 → 전부 신규 처리:", a.master, file=sys.stderr)
+    if a.master and os.path.exists(a.master):
         with open(a.master, encoding="utf-8-sig", newline="") as f:
             for line in csv.reader(f):
                 if line and line[0] and line[0] != "키": known.add(line[0].strip())
