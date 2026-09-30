@@ -77,7 +77,7 @@ def first_m2(text):
     return float(m.group(1).replace(",", "")) if m else 0.0
 
 def sum_floor_m2(text):
-    """일반건물: 층별 ㎡ 합계. '연면적제외' 줄과 '(현황 …)' 괄호 안은 뻔다. [확정 — 2026-09-29 실측]"""
+    """일반건물: 층별 ㎡ 합계. '연면적제외' 줄과 '(현황 …)' 괄호 안은 제외한다. [확정 — 2026-09-29 실측]"""
     total = 0.0
     for line in (text or "").splitlines():
         if "연면적제외" in line: continue
@@ -171,7 +171,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("raw"); ap.add_argument("--out", required=True)
     ap.add_argument("--master", help="02단원 _기록/_마스터_신건.csv (키 = 법원|사건번호|물건번호)")
-    ap.add_argument("--exclude-known", action="store_true", help="마스터에 있는 물건은 출력에서 뻔다")
+    ap.add_argument("--exclude-known", action="store_true", help="마스터에 있는 물건은 출력에서 제외한다")
     ap.add_argument("--today", help="YYYYMMDD (기본 오늘)")
     ap.add_argument("--usage", default="전체", choices=USAGE_GROUPS, help="용도군 (기본 전체)")
     a = ap.parse_args()
