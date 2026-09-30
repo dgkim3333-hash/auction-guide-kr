@@ -8,7 +8,7 @@
 //   3) [C] 블록을 60~150초 간격으로 실행해 진행 상황을 본다
 //   4) done===true, 모든 법원 got===tot, fail 빈 배열이면 [D] 블록으로 JSON 다운로드
 //
-// 요청 사이 300ms 쉼은 서버 부담을 줄이려는 것이다. 줄이지 않는다.
+// 요청 사이 300ms 쉴은 서버 부담을 줄이려는 것이다. 줄이지 않는다.
 // 이용약관 제15조(입찰참가 외 영리목적 이용 금지)와 「비정상적 다량 조회 시 IP 차단」 안내를 지킨다.
 // 개인 검토 목적, 주 1회, 서울·경기 15개 법원 범위 안에서만 쓴다.
 
@@ -20,8 +20,22 @@ window.__COURTS = {
   B000214: "의정부", B214807: "고양", B214804: "남양주", B000241: "부천",
   B000250: "수원", B000251: "성남", B000252: "여주", B000253: "평택", B250826: "안산", B000254: "안양"
 };
-// 다른 지역을 쓰려면 물건상세검색 화면에서 아래를 실행해 코드를 읽는다:
-//   $p.getComponentById('mf_wfm_mainFrame_sbx_rletCortOfc').getItemArray()
+// 전국 법원 코드 61개 [확정 — 2026-09-30 물건상세검색 sbx_rletCortOfc 실측]. 필요한 것만 위 __COURTS 에 옮겨 쓴다.
+//   B000210:서울중앙지방법원  B000211:서울동부지방법원  B000215:서울서부지방법원  B000212:서울남부지방법원
+//   B000213:서울북부지방법원  B000214:의정부지방법원  B214807:고양지원  B214804:남양주지원
+//   B000240:인천지방법원  B000241:부천지원  B000250:수원지방법원  B000251:성남지원
+//   B000252:여주지원  B000253:평택지원  B250826:안산지원  B000254:안양지원
+//   B000260:춘천지방법원  B000261:강릉지원  B000262:원주지원  B000263:속초지원
+//   B000264:영월지원  B000270:청주지방법원  B000271:충주지원  B000272:제천지원
+//   B000273:영동지원  B000280:대전지방법원  B000281:홍성지원  B000282:논산지원
+//   B000283:천안지원  B000284:공주지원  B000285:서산지원  B000310:대구지방법원
+//   B000311:안동지원  B000312:경주지원  B000313:김천지원  B000314:상주지원
+//   B000315:의성지원  B000316:영덕지원  B000317:포항지원  B000320:대구서부지원
+//   B000410:부산지방법원  B000412:부산동부지원  B000414:부산서부지원  B000411:울산지방법원
+//   B000420:창원지방법원  B000431:마산지원  B000421:진주지원  B000422:통영지원
+//   B000423:밀양지원  B000424:거창지원  B000510:광주지방법원  B000511:목포지원
+//   B000512:장흥지원  B000513:순천지원  B000514:해남지원  B000520:전주지방법원
+//   B000521:군산지원  B000522:정읍지원  B000523:남원지원  B000530:제주지방법원
 
 const K = "aeeEvlAmtMax aeeEvlAmtMin carMdlNm carMdyrMax carMdyrMin cortAuctnMbrsId csNo dspslDxdyYmd dspslPlcNm execrOfcDvsCd flbdNcntMax flbdNcntMin fothDspslHm fstDspslHm fuelKndCd gdsVendNm grbxTypCd jdbnCd lafjOrderBy lclDspslGdsLstUsgCd lwsDspslPrcMax lwsDspslPrcMin lwsDspslPrcRateMax lwsDspslPrcRateMin mclDspslGdsLstUsgCd mvprpArtclKndCd mvprpArtclNm mvprpAtchmPlcTypCd mvprpDspslPlcAdongEmdCd mvprpDspslPlcAdongSdCd mvprpDspslPlcAdongSggCd objctArDtsMax objctArDtsMin rdDspslPlcAdongEmdCd rdDspslPlcAdongSdCd rdDspslPlcAdongSggCd rdnmNo rdnmSdCd rdnmSggCd rletDspslSpcCondCd rprsAdongEmdCd rprsAdongSdCd rprsAdongSggCd sclDspslGdsLstUsgCd scndDspslHm sideDvsCd thrdDspslHm".split(' ');
 const info = {}; K.forEach(k => info[k] = "");
