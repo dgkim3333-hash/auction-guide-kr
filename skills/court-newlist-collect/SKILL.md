@@ -128,15 +128,22 @@ python build_rows.py court_newlist_raw_YYYYMMDD.json --out court_newlist_YYYYMMD
 
 ---
 
-## STEP 4 — 엑셀·검사·보고: 02단원 그대로
+## STEP 4 — 엑셀: `build_excel.py` 3단계 (Cowork·Code 어디서나 같은 파일)
 
-여기서부터는 **[02단원 3절 [3]~[6]](../../02_신건수집_탐색엑셀.md)** 을 한 글자도 바꾸지 않고 따른다.
+양식(열·색·행 높이·슬라이서 위치)은 02단원 3절 [3]·[4] 규격이며, **스크립트에 고정**돼 있다. 손으로 다시 짜지 않는다.
+2026-09-30 Cowork 와 Code 에서 각자 만든 엑셀의 양식이 달라진 것이 계기다 `[확정 — 실측]`.
 
-- 파일명 `신건레이더_YYYYMMDD.xlsx`, 슬라이서 7개(시도·시군구·법원·용도·감정가 규모대·남은 날·조회수 구간) + 용도군 1개 = 8개, 144×170pt, 검사 A·B·C
-- **표 이름은 영문**(`TBL_new` 등). Excel MCP 가 한글 표 이름을 만들지도 참조하지도 못한다 `[확정 — 2026-09-30 Cowork·Code 양쪽 실측]`. 수식의 구조적 참조도 그 이름으로 쓴다
-- 값 기록 함정 `[확정 — 2026-09-29 실측]`: 사건번호 「2026-5」·매각기일월 「2026-09」는 Excel 이 날짜로 바꿀 수 있다 → 앞에 `'` 를 붙여 기록. 매각기일은 Excel 일련번호로 넣고 서식으로 표시
-- 조회수 구간이 한 항목뿐이면 규격상 슬라이서 항목 수 위반이다 → `⓪ 미제공` 한 항목으로 두고 **제목행과 카톡 보고에 사유를 적는다**
+| 단계 | 누가 | 명령·호출 |
+|---|---|---|
+| **1** | 파이썬 | `python build_excel.py stage1 court_newlist_YYYYMMDD.csv --out 신건레이더_YYYYMMDD.xlsx` — 값·헤더·서식·행높이·열폭·보조열·틀고정. 끝에 2단계용 JSON(표 범위·수식·슬라이서 8개)을 출력한다 |
+| **2** | Excel MCP | `file(open)` → `table(create, sheet 탐색, range = JSON.table_range, table_name TBL_new, TableStyleMedium2)` → `range(set-formulas 탐색!C4:C9 = JSON.kpi_formulas_C4_C9)` → `range(set-formulas 탐색!A15 = JSON.spill_formula_A15)` → `slicer(create-table-slicer)` ×8 (JSON.slicers 의 name·column·position 그대로) → `range(get-values C4)` 가 행 수와 같은지 → **`file(close, save:true)`** |
+| **3** | 파이썬 | `python build_excel.py patch 신건레이더_YYYYMMDD.xlsx` — 슬라이서 144×170pt 절대 좌표(다중선택 버튼 보존), 머리글을 열 이름으로, 검사 5개 통과 시에만 덮어쓴다 |
+
+- 표 이름은 **영문 `TBL_new`** — Excel MCP 가 한글 표 이름을 만들지도 참조하지도 못한다 `[확정 — 2026-09-30 Cowork·Code 실측]`
+- Excel MCP 가 없는 환경이면 1단계까지만 만들고 「표·수식·슬라이서 미생성」을 보고한다
+- 조회수 구간 슬라이서는 항목 1개(`⓪ 미제공`)뿐이다 → 정상. **제목행과 카톡 보고에 사유를 적는다**
 - 카톡 형식은 02단원 [6]. 사이트 이름만 「법원경매정보」로 적는다
+- 마스터(`_기록\_마스터_신건.csv`) 갱신은 3단계 검사 통과 뒤에만 한다(02단원 [2-1])
 
 ---
 
@@ -147,6 +154,8 @@ python build_rows.py court_newlist_raw_YYYYMMDD.json --out court_newlist_YYYYMMD
 | `[B]` 실행 후 `[C]` 가 `rows: 0` 그대로 | 물건상세검색 탭이 아님 · 로그인 만료 | STEP 1 다시, 로그인 후 재실행 |
 | `[D]` 에서 `FROM is not defined` | 블록을 따로 실행하면 `[B]` 의 const 가 사라진다 | 2026-09-30 판 collect.js 는 `window.__FROM/__TO` 를 쓴다. 이전 판이면 갱신 |
 | 표 생성이 `Invalid table name` | 한글 표 이름 | 영문 이름(`TBL_new`)으로 |
+| 엑셀 양식이 지난번과 다르다 | 스크립트 대신 손으로 만들었다 | STEP 4 `build_excel.py` 3단계로 다시 |
+| `patch` 가 FAIL | 2단계(표·슬라이서 8개) 미완료 또는 저장 안 함 | 2단계를 끝내고 `file(close, save:true)` 뒤 다시 |
 | 「사용에 불편을 드려서 죄송합니다」 | pageSize 100 | 50 으로 |
 | JS 도구 타임아웃 | 한 호출에 45초 넘게 넣음 | 블록을 쪼갠다. 스크립트는 뒤에서 계속 돈다 — `[C]` 로 확인 |
 | JSON 다운로드가 안 생김 | 자동 다운로드 미허용 | 01단원 3단계. 허용 뒤 밀린 파일이 한꺼번에 떨어질 수 있다 → md5 로 중복 정리 |
