@@ -8,7 +8,7 @@ build_rows.py 가 만든 CSV → 02단원 3절 규격의 신건레이더 엑셀 
          → 끝에 2단계에서 Excel MCP 에 넣을 값(표 범위·수식·슬라이서 목록)을 JSON 으로 출력한다.
   2단계  Excel MCP (SKILL.md STEP 4) — 표 생성 → C4:C9 수식 → A15 스필 수식 → 슬라이서 8개 → 저장·닫기
   3단계  python build_excel.py patch 신건레이더_YYYYMMDD.xlsx
-         → 슬라이서를 144×170pt 절대 좌표로, 캐션을 열 이름으로 바꾸고 검사한다. 검사 실패면 원본을 건드리지 않는다.
+         → 슬라이서를 144×170pt 절대 좌표로, 머리글을 열 이름으로 바꾸고 검사한다. 검사 실패면 원본을 건드리지 않는다.
 
 규격 출처: 02단원 3절 [3]·[4] (2026-09-30 Cowork·Code 실측으로 두 환경의 산출물이 달라져 스크립트로 고정)
 금액은 원 단위 정수. 표 이름은 영문 TBL_new (Excel MCP 가 한글 표 이름을 못 만든다).
@@ -144,7 +144,7 @@ def patch(a):
             d = re.sub(r'<xdr:twoCellAnchor.*?</xdr:twoCellAnchor>', repl, x, flags=re.S).encode('utf-8')
         elif re.match(r'xl/slicers/slicer\d+\.xml$', it.filename):
             x = d.decode('utf-8')
-            for n, c in CAP.items():                      # 캐션만 열 이름으로. name 은 그대로(캐시 참조)
+            for n, c in CAP.items():                      # 머리글만 열 이름으로. name 은 그대로(캐시 참조)
                 x = re.sub(r'(<slicer\b[^>]*\bname="%s"[^>]*\bcaption=")[^"]*(")' % n, r'\g<1>%s\2' % c, x)
             d = x.encode('utf-8')
         zout.writestr(it, d)
