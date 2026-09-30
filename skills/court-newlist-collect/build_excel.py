@@ -13,7 +13,7 @@ build_rows.py 가 만든 CSV → 02단원 3절 규격의 신건레이더 엑셀 
 규격 출처: 02단원 3절 [3]·[4] (2026-09-30 Cowork·Code 실측으로 두 환경의 산출물이 달라져 스크립트로 고정)
 금액은 원 단위 정수. 표 이름은 영문 TBL_new (Excel MCP 가 한글 표 이름을 못 만든다).
 """
-import argparse, csv, json, re, sys, zipfile
+import argparse, csv, json, os, re, sys, zipfile
 from datetime import date
 
 FONT = "맑은 고딕"
@@ -161,11 +161,16 @@ def patch(a):
         "Requires sle15 보존": sum(zb.read(n).decode().count('Requires="sle15"') for n in zb.namelist() if n.endswith('.xml')) == n_sl,
     }
     for k, v in checks.items(): print(("PASS " if v else "FAIL ") + k)
-    if all(checks.values()):
-        open(src, 'wb').write(open(tmp, 'rb').read()); print("PATCH APPLIED →", src)
+    za.close(); zb.close()      # Windows 는 열린 zip 을 지우지 못한다 [확정 — 2026-09-30 Code 실측: WinError 32 → exit 1]
+    ok = all(checks.values())
+    if ok:
+        with open(tmp, 'rb') as fi, open(src, 'wb') as fo: fo.write(fi.read())
+        print("PATCH APPLIED →", src)
     else:
-        print("검사 실패 — 원본 유지. 2단계(표·슬라이서)가 끝났는지 확인"); sys.exit(1)
-    import os; os.remove(tmp)
+        print("검사 실패 — 원본 유지. 2단계(표·슬라이서)가 끝났는지 확인")
+    try: os.remove(tmp)
+    except OSError as e: print("임시 파일 삭제 실패(결과 파일은 정상):", tmp, e)
+    if not ok: sys.exit(1)
 
 
 def main():
