@@ -14,7 +14,7 @@
 > 그 표시가 자주 거슬릴 때 ③으로 넘어가세요. MCP 를 더 붙이는 것보다 창고를 채우는 편이 빠르고 대화 분량도 아낍니다.
 
 > [!NOTE]
-> **Code 탭에도 그대로 붙습니다.** 데스크탑 앱은 `claude_desktop_config.json` 의 MCP 서버를 **Code 탭 로컬 세션에도 로드**합니다 `[확정 — code.claude.com/docs/en/desktop 2026-09-30 조회]`. 이 단원대로 설정 파일에 넣으면 Chat·Cowork·Code 세 곳에서 같은 도구가 보입니다. PlayMCP 는 claude.ai 커넥터라 역시 자동입니다. `claude mcp add` 명령은 **터미널 CLI 전용**이라 이 교재에서는 쓰지 않습니다. 확인 방법은 5절.
+> **Code 탭에도 그대로 붙습니다.** 데스크탑 앱은 `claude_desktop_config.json` 의 MCP 서버를 **Code 탭 로컬 세션에도 로드**합니다 `[확정 — code.claude.com/docs/en/desktop 2026-09-30 조회 + 강사 PC /mcp 실측]`. 이 단원대로 설정 파일에 넣으면 Chat·Cowork·Code 세 곳에서 같은 도구가 보입니다. PlayMCP 는 claude.ai 커넥터라 역시 자동입니다. `claude mcp add` 명령은 **터미널 CLI 전용**이라 이 교재에서는 쓰지 않습니다. 확인 방법은 5절.
 
 ---
 
@@ -245,7 +245,7 @@ powershell -ExecutionPolicy Bypass -File "C:\AI\mcp\키입력.ps1"
 | 순서 | 할 일 | 이렇게 되면 성공 |
 |---|---|---|
 | **1** | Claude 앱을 **완전히 종료**(트레이 포함) 후 다시 켬 | 설정 파일은 앱을 켤 때 읽음 |
-| **2** | **Code 탭** → 새 세션 → 입력창에 `/mcp` | 목록에 `vworld-landuse` · `datagokr` 이 **connected**, 아래 「웹」 구간에 **PlayMCP** `[확정 — PlayMCP 2026-09-30 실측 / 설정 파일 서버 표시는 문서 기준]` |
+| **2** | **Code 탭** → 새 세션 → 입력창에 `/mcp` | 「커넥터」 표가 뜨고 `vworld-landuse` · `datagokr` 이 **유형 「데스크톱 · 로컬 개발」 · 상태 「연결됨」**, **PlayMCP** 는 **유형 「웹」 · 「연결됨」** `[확정 — 2026-09-30 강사 PC 실측, 설정 파일 서버 전부 표시됨]` |
 | **3** | 같은 세션에서 「서울 강남구 역삼동 737 개별주택가격 알려줘」 | 가격이 나옴 |
 
 > [!NOTE]
