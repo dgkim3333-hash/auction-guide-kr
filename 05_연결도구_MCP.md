@@ -18,7 +18,7 @@
 
 ---
 
-## 1. 기본 — PlayMCP 도구함에 4개 담기
+## $\color{#d97757}{\textsf{1. 기본 — PlayMCP 도구함에 4개 담기}}$
 
 02단원에서 카톡 보고용으로 **PlayMCP** 를 이미 연결했습니다. 같은 도구함에 4개를 더 담기만 하면 됩니다.
 PlayMCP 연결이 처음이면 [PlayMCP 연결 안내](https://github.com/dgkim3333-hash/claude-guide-kr/blob/main/Claude_PlayMCP_연결안내.md) 를 먼저 하세요.
@@ -70,7 +70,7 @@ PlayMCP 연결이 처음이면 [PlayMCP 연결 안내](https://github.com/dgkim3
 
 ---
 
-## 2. 창고와 PlayMCP 로 안 되는 것만 — MCP 2개
+## $\color{#d97757}{\textsf{2. 창고와 PlayMCP 로 안 되는 것만 — MCP 2개}}$
 
 **조회 순서는 늘 같습니다: ① 03단원 창고(DuckDB) → ② PlayMCP → ③ MCP.** 앞에서 되면 거기서 멈춥니다.
 창고와 PlayMCP 로 **안 되는 것만** 아래 MCP 2개로 붙입니다. 그 밖의 MCP 는 이 교재에서 쓰지 않습니다.
@@ -93,7 +93,7 @@ PlayMCP 연결이 처음이면 [PlayMCP 연결 안내](https://github.com/dgkim3
 
 ---
 
-## 3. MCP 2개 연결
+## $\color{#d97757}{\textsf{3. MCP 2개 연결}}$
 
 ### 3-0. 준비 (한 번만)
 
@@ -183,7 +183,7 @@ uv sync
 
 ---
 
-## 4. 설정 파일에 넣고 키 입력하기
+## $\color{#d97757}{\textsf{4. 설정 파일에 넣고 키 입력하기}}$
 
 [mcp/claude_desktop_config_경매분석.json](mcp/claude_desktop_config_경매분석.json) 은 기본 설정 8개에 **ⓐ vworld-landuse · ⓑ datagokr 2개를 더한 완성본**입니다.
 키 자리는 `<<여기에_…>>` 로 비어 있습니다.
@@ -238,7 +238,7 @@ powershell -ExecutionPolicy Bypass -File "C:\AI\mcp\키입력.ps1"
 
 ---
 
-## 5. Code 탭에서 확인하기
+## $\color{#d97757}{\textsf{5. Code 탭에서 확인하기}}$
 
 04·08단원 분석은 Code 탭에서 돌립니다. 설정 파일에 넣은 MCP 가 Code 에 붙었는지 아래로 확인합니다.
 
@@ -255,7 +255,7 @@ powershell -ExecutionPolicy Bypass -File "C:\AI\mcp\키입력.ps1"
 
 ---
 
-## 안 될 때
+## $\color{#d97757}{\textsf{안 될 때}}$
 
 | 증상 | 원인 | 해결 |
 |---|---|---|
