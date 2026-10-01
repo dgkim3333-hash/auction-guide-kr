@@ -4,10 +4,10 @@
 > 이 단원에서는 **DuckDB**(덕디비)라는 **데이터 창고**를 붙여,
 > 매주 받은 목록을 **한 곳에 쌓고**, Claude 에게 **한국말로 물어보는** 방법을 배웁니다.
 > 9·10절에서는 실거래가·건축물대장·공시가격까지 창고에 넣고 **매달 저절로 새로 고치게** 만듭니다. MCP 를 여러 개 붙이는 것보다 빠르고 대화 분량도 아낍니다.
-> 11절은 MCP 설정 파일이 두 개인 이유와 어디서 무엇이 보이는지, 12절은 창고를 **여러 곳에서 같이 쓸 때**의 규칙입니다. 데스크탑 앱 안에서는 원본 하나로 충분합니다.
+> 11절은 설정 파일의 MCP 가 Code 탭에 자동으로 붙는다는 것, 12절은 창고를 **여러 곳에서 같이 쓸 때**의 규칙입니다. 데스크탑 앱 안에서는 원본 하나로 충분합니다.
 >
 > 창고 연결(DuckDB MCP)은 한 번 하면 **Chat·Cowork·Code 탭 어디서나** 같이 보입니다. 이 교재의 분석(04·08단원)과 루틴(02·06·10절)은 **Code 탭**에서 돌리므로, 연결 확인은 Code 탭 `/mcp` 로 합니다 `[확정 — 2026-09-30 강사 PC 실측]`.
-> 앱 안끼리는 duckdb 서버 하나를 함께 쓰므로 충돌하지 않습니다. 잠금은 **앱 밖 프로그램**(`duckdb.exe`·PowerShell `claude` 등)에서만 생깁니다 → [12절](#12-창고를-여러-곳에서-같이-쓸-때).
+> 앱 안끼리는 duckdb 서버 하나를 함께 쓰므로 충돌하지 않습니다. 잠금은 **앱 밖 프로그램**(`duckdb.exe`·탐색기 복사 등)에서만 생깁니다 → [12절](#12-창고를-여러-곳에서-같이-쓸-때).
 
 | 창고를 붙이기 전 | 붙인 뒤 |
 |---|---|
@@ -421,121 +421,38 @@ C:\AI\창고자료\[202610] 폴더의 주택 공시가격 CSV를 경매창고 �
 
 ---
 
-## 11. MCP 설정 파일은 두 개 — 어디서 무엇이 보이나
+## 11. MCP 는 설정 파일 하나로 — Code 탭에 자동으로 붙습니다
 
-> 데스크탑 앱에는 MCP 설정 파일이 **두 개** 있습니다. 데스크탑 앱(Chat·Cowork·**Code 탭**)은 `claude_desktop_config.json` 을 읽고, PowerShell 의 `claude` 명령(CLI)은 `.claude.json` **만** 읽습니다.
-> 이 교재처럼 **Code 탭에서만** 쓴다면 05단원의 설정 파일 하나로 충분합니다. `.claude.json` 등록은 **CLI 를 쓸 때만** 필요합니다.
-> 12절(창고를 여러 곳에서 같이 쓸 때)을 이해하려면 이 절이 먼저 필요합니다.
+> 05단원에서 설정 파일(`claude_desktop_config.json`)에 넣은 MCP 는 **Code 탭에도 자동으로 붙습니다.** 따로 등록할 것이 없습니다.
 
-**비유** — 출입 명부가 두 권인 건물입니다. 정문(데스크탑 앱)은 두 권을 다 보지만 이름이 겹치면 **정문 명부**를 믿고, 뒷문(CLI)은 **뒷문 명부만** 읽습니다.
+| 어디서 | 붙는 것 |
+|---|---|
+| Chat · Cowork · **Code 탭 로컬 세션** · **로컬 루틴**(10절) | 설정 파일의 MCP + 확장 프로그램(.mcpb) + 원격 커넥터(PlayMCP 등) |
+| 클라우드 세션 · 원격 루틴 | 내 PC 의 MCP 는 **붙지 않습니다** |
 
-### ① 두 설정 파일
+`[확정 — code.claude.com/docs/en/desktop · desktop-scheduled-tasks 2026-10-01 조회 + 강사 PC 실측: 설정 파일 서버 31개 모두 Code 탭에 연결됨]`
 
-| | `claude_desktop_config.json` | `.claude.json` |
-|---|---|---|
-| 위치 (Windows) | Store 판: `%LOCALAPPDATA%\Packages\Claude_<id>\LocalCache\Roaming\Claude\` / 일반 설치판: `%APPDATA%\Claude\` | `%USERPROFILE%\.claude.json` |
-| 읽는 곳 | **데스크탑 앱** — Chat·Cowork, 그리고 **Code 탭 로컬 세션** | **Claude Code** — PowerShell `claude`(CLI), 그리고 Code 탭도 함께 |
-| 등록 방법 | 파일 직접 편집 (`설정` → `개발자` → `설정 편집`, [05단원 4절](05_연결도구_MCP.md)) | `claude mcp add` 명령 |
-| 확인 방법 | Code 탭 새 세션 `/mcp` ([05단원 5절](05_연결도구_MCP.md)) | PowerShell `claude mcp list` |
+- 확인은 Code 탭 **새 세션**에서 `/mcp` 로 합니다([05단원 5절](05_연결도구_MCP.md)). 설정 파일을 고친 뒤에는 앱을 트레이까지 완전히 끄고 다시 켭니다.
+- `설정` → `커넥터` 화면은 Code 탭 상태를 보여 주지 않습니다. Code 탭은 `/mcp` 로 확인합니다 `[확정 — 강사 PC]`.
+- 인터넷 글에서 `claude mcp add` 명령이나 `.claude.json` 파일을 보게 되면, 그건 **명령어 창(PowerShell)에서 쓰는 Claude Code 용**입니다. 이 교재는 쓰지 않으니 따라 하지 마세요. 설정 파일과 같은 이름을 거기에 넣으면 쓰이지도 않는 서버가 따로 떠서 오류만 생깁니다 `[확정 — 강사 PC 실측]`.
 
-- 위치 칸의 `Claude_<id>` 는 PC 마다 다릅니다. 어느 판인지 확인하는 법은 05단원에 있습니다.
-- 확장 프로그램(.mcpb, 예: Excel)은 **어느 파일에도 기록되지 않습니다.** `설정` → `확장 프로그램` 에서 관리합니다 `[확정 — 강사 PC 실측]`.
+**점검**
 
-### ② 어디서 무엇이 보이나
-
-| 실행 위치 | 읽는 설정 | 라벨 |
-|---|---|---|
-| Chat · Cowork | `claude_desktop_config.json` + 확장 프로그램 + 원격 커넥터 | `[확정 — 강사 PC 실측]` |
-| Code 탭 (로컬 세션) | `claude_desktop_config.json` + `.claude.json` + 확장 프로그램 + 원격 커넥터. **같은 이름이 양쪽에 있으면 `claude_desktop_config.json` 쪽을 씁니다** | `[확정 — code.claude.com/docs/en/desktop 2026-10-01 조회]` (확장 프로그램은 `[확정 — 강사 PC /mcp 실측]`) |
-| PowerShell `claude` (CLI) | `.claude.json` **만** | `[확정 — 같은 문서 + 강사 PC claude mcp list 실측]` |
-
-**결론: Code 탭은 설정 파일 하나로 충분합니다. `.claude.json` 은 PowerShell `claude`(CLI)를 쓸 때만 필요합니다.**
-
-- Code 탭 **로컬 세션**과 **로컬 예약 루틴**(10절)은 설정 파일의 MCP·확장 프로그램·원격 커넥터를 자동으로 받습니다. **클라우드 세션·원격 루틴**에는 내 PC 의 MCP 가 붙지 않습니다 `[확정 — code.claude.com/docs/en/desktop · desktop-scheduled-tasks]`
-- CLI 를 쓰지 않는다면 설정 파일과 **같은 이름을 `.claude.json` 에 두지 마세요.** Code 탭은 설정 파일 정의를 쓰지만, 앱이 `.claude.json` 쪽도 세션마다 한 벌 더 띄웁니다. 쓰이지도 않는 서버가 오류 메시지와 중복 프로세스를 만듭니다(증권 API 처럼 토큰을 쓰는 서버는 특히 주의) `[확정 — 현상: 강사 PC 실측 / 추정 — 원인: 문서의 .claude.json 서버 재전달]`
-
-> [!NOTE]
-> 설정 파일에 넣었는데 Code 탭 `/mcp` 에 안 보이면, 앱을 트레이까지 완전히 끄고 다시 켠 뒤 **새 세션**에서 다시 확인하세요([05단원 5절](05_연결도구_MCP.md)).
-
-### ③ CLI 에서도 쓰려면 — `.claude.json` 에 등록 (선택 · Code 탭에는 불필요)
-
-명령어 창(PowerShell)에서 `claude` 를 쓸 사람만 해당합니다. **Code 탭만 쓴다면 건너뛰세요** — 등록하면 오히려 ②의 중복이 생깁니다.
-
-**방법 A — 한 개씩 직접 등록 (기본)**
-
-```powershell
-claude mcp add <이름> -s user '--' "<실행파일 경로>" <인자들>
-claude mcp list
-```
-
-- `-s user` = 모든 폴더(프로젝트)에서 사용
-- 이름은 설정 파일과 **같게** 두면 편합니다. 프롬프트·스킬이 도구를 `mcp__<이름>__…` 으로 부르기 때문입니다. Code 탭은 같은 이름이면 설정 파일 정의를 씁니다 `[확정 — code.claude.com/docs/en/desktop]`. 다만 앱이 `.claude.json` 쪽도 따로 띄우므로, 그쪽 설정이 깨져 있으면 Code 탭에 「Connection closed」가 보일 수 있습니다(⑤ 함정 6)
-- **단, duckdb 처럼 파일 하나를 쥐는 서버는 예외**입니다 → ④
-- 키가 필요한 서버는 `-e 이름=값` 으로 넣는데, 이러면 PowerShell 기록에 키가 남습니다. 키를 대화창에 붙여 넣지도 마세요
-
-**방법 B — 스크립트로 일괄 복사 (강사 환경 예시)**
-
-```powershell
-C:\NPL\.venv-datago\Scripts\python.exe "<경로>\add_missing_to_code.py" --dry-run   # 미리 보기
-C:\NPL\.venv-datago\Scripts\python.exe "<경로>\add_missing_to_code.py"             # 적용
-claude mcp list
-```
-
-- 위 경로는 **강사 PC 예시**입니다. 이 스크립트는 수강생 PC 에 없으니 **방법 A 를 쓰세요.**
-- 하는 일: 설정 파일에만 있는 서버를 `.claude.json` 에 같은 이름·같은 설정으로 복사하고, 키 값은 화면에 내지 않으며, 저장 전 자동 백업합니다. 이미 있는 서버는 건드리지 않고, duckdb 는 일부러 제외합니다.
-
-> [!NOTE]
-> `claude mcp add-from-claude-desktop`(설정 파일에서 한 번에 가져오기)은 **macOS·WSL 전용**이라 Windows 에서는 쓸 수 없습니다 `[확정 — code.claude.com/docs/en/mcp 2026-10-01 조회]`.
-
-**확인** — `claude mcp list` 에 `✔ Connected` 가 나오면 CLI 쪽은 완료입니다. `설정` → `커넥터` 화면은 CLI 확인용이 아닙니다.
-
-### ④ duckdb 처럼 파일 하나를 쥐는 MCP 는 따로 생각합니다
-
-- DuckDB 파일은 **쓰기 프로세스 1개**만 열 수 있습니다 `[확정]`
-- 데스크탑 앱이 띄운 duckdb 서버 하나를 Chat·Cowork·Code 탭이 함께 씁니다. Code 탭의 duckdb 도 원본에 연결됩니다 `[확정 — 2026-10-01 강사 PC 실측: Code 탭 duckdb_databases() 결과, Code 세션을 늘려도 원본 서버 프로세스가 늘지 않음]`
-- PowerShell `claude` 처럼 **자기 프로세스를 따로 띄우는 쪽**이 같은 파일에 쓰기로 붙으면 충돌합니다. 그래서 **CLI 로 같은 DB 를 쓸 때만** 읽기 전용 사본이 필요합니다(강사 환경은 쓰는 곳이 없어 폐기) → [12절](#12-창고를-여러-곳에서-같이-쓸-때)
-- 그래서 duckdb 는 `.claude.json` 에 **같은 이름으로 등록하지 않습니다.** 강사 PC 에서 같은 이름이 양쪽에 있을 때 Code 세션마다 쓰이지 않는 사본 duckdb 가 한 개씩 더 떠서 「Read-only」 안내가 보였지만, 실제 쿼리는 원본(설정 파일 정의)으로 갔습니다 `[확정 — 강사 Code 탭 실측 / 사본이 생긴 원인은 추정 — .claude.json 서버 재전달]`
-
-### ⑤ 실제로 걸린 함정 (강사 환경)
-
-| # | 함정 | 증상 | 원인 · 해결 |
-|---|---|---|---|
-| 1 | `uvx 패키지@latest` 로 등록 | CLI 쪽에서만 `Connection closed` (`No module named 'mcp.server.fastmcp'`) | 매번 최신 MCP SDK 2.x 를 받아 옛 서버가 깨짐. 설정 파일과 같은 **고정 설치 실행파일**로 등록 `[확정]` |
-| 2 | Store 판 앱의 확장 경로 | `.claude.json` 에 등록한 Excel 이 `CONNECTION_CLOSED` | 확장 실경로는 `%LOCALAPPDATA%\Packages\Claude_<id>\LocalCache\Roaming\Claude\Claude Extensions\…`. `AppData\Roaming\…` 은 앱 안에서만 보이는 경로 `[확정]` |
-| 3 | PowerShell 이 `--` 를 삼킴 | `error: unknown option '--db-path'` | `'--'` 처럼 작은따옴표로 감쌉니다 `[확정]` |
-| 4 | 화면의 `PS C:\...>` 까지 복사 | `Get-Process` 오류 | `PS …>` 는 화면 표시입니다. 명령만 입력 `[확정]` |
-| 5 | `커넥터` 화면으로 확인 | 화면은 전부 ✓ 인데 CLI 는 실패 | 그 화면은 CLI 상태가 아님. CLI 는 `claude mcp list`, Code 탭은 `/mcp` `[확정]` |
-| 6 | 같은 이름을 설정 파일과 `.claude.json` 양쪽에 등록 | Code 탭은 정상인데 「Connection closed」 가 따로 보임 (강사 PC nts 사례) | Code 탭은 설정 파일 정의를 쓰지만 앱이 `.claude.json` 쪽도 띄움. CLI 를 안 쓰면 `.claude.json` 에서 지우기 `[확정 — 현상 / 추정 — 원인]` |
-| 7 | 로그 파일이 없다고 「서버가 없다」고 판단 | 멀쩡한 서버를 빠졌다고 오판 (강사 PC 2026-10-01 실제 오판) | 어떤 경우에 로그가 생기는지부터 확인. 서버 상태는 Code 탭 `/mcp` 로 확인합니다 `[확정]` |
-
-### 실습
-
-1. `설정` → `개발자` 에서 설정 파일을 열어 **MCP 서버 이름 목록만** 확인합니다 (키가 있으니 화면 공유 금지).
-2. Code 탭 새 세션에서 `/mcp` 를 실행해 1번 목록이 다 보이는지 비교합니다.
-3. PowerShell 에서 `claude mcp list` 를 실행합니다. 1번 서버가 **안 나오는 것이 정상**입니다 (CLI 는 `.claude.json` 만 읽음).
-4. (CLI 를 쓸 사람만) 설정 파일에만 있는 서버 하나를 방법 A 로 등록하고 `✔ Connected` 를 확인합니다. 일부러 `'--'` 의 따옴표를 빼고 실행해 함정 3 을 직접 겪어 보세요.
-
-### 점검표
-
-- [ ] 내 PC 의 설정 파일 위치(Store 판 / 일반 설치판)를 안다
-- [ ] Code 탭은 설정 파일을, CLI 는 `.claude.json` 만 읽는다는 것을 설명할 수 있다
-- [ ] Code 탭 확인은 `/mcp`, CLI 확인은 `claude mcp list` 로 한다
-- [ ] CLI 를 쓸 때만 `.claude.json` 에 등록했고, Code 탭만 쓰면 `.claude.json` 에 설정 파일과 같은 이름을 두지 않았다 (duckdb 는 어느 경우든 같은 이름 금지)
-- [ ] `uvx …@latest` 대신 고정 설치 실행파일을 썼다
-- [ ] 키가 대화창·PowerShell 기록에 남지 않게 했다
+- [ ] 설정 파일에 넣은 MCP 가 Code 탭 새 세션 `/mcp` 에 「연결됨」으로 보인다
+- [ ] `claude mcp add` 는 쓰지 않았다
 
 ---
 
 ## 12. 창고를 여러 곳에서 같이 쓸 때
 
 > 데스크탑 앱 안(Chat·Cowork·Code 탭)은 duckdb 서버 **하나를 함께 씁니다.** 그래서 창고는 **원본 하나로 충분합니다.**
-> 따로 프로세스를 띄우는 **PowerShell 의 `claude`(CLI)** 가 같은 창고를 써야 할 때만 읽기 전용 사본이 필요합니다 → [부록](#부록--cli-에서-같은-창고를-써야-할-때).
+> 잠금 오류는 **앱 밖 프로그램**(`duckdb.exe`, 탐색기 복사 등)이 창고 파일을 열려고 할 때만 생깁니다.
 
 ### ① 앱 안에서는 서버 하나를 함께 씁니다
 
 - 데스크탑 앱이 띄운 duckdb 서버 하나를 Chat·Cowork·Code 탭이 같이 씁니다. Code 탭의 duckdb 도 **원본**(쓰기 가능)에 연결됩니다 `[확정 — 2026-10-01 강사 PC 실측: Code 탭 duckdb_databases() 결과, Code 세션을 늘려도 원본 서버 프로세스가 늘지 않음]`
 - Code 탭에서 원본 연결이 잠금으로 실패한 기록은 없습니다 `[확정 — Code 탭 MCP 로그]`
-- 결론: **혼자 데스크탑 앱만 쓰면 원본 하나로 충분합니다.** 3절 방법으로 한 번 연결하면 끝입니다 `[추정 — 위 실측 근거]`
+- 그래서 **원본 하나로 충분합니다.** 3절 방법으로 한 번 연결하면 끝입니다 `[확정]`
 
 ### ② 잠금이 생기는 경우 — 앱 밖의 다른 프로그램
 
@@ -559,10 +476,9 @@ DuckDB MCP 는 설정에 따라 파일을 쥐는 시간이 다릅니다 `[확정
 | 앱 밖 프로그램 | 결과 |
 |---|---|
 | `duckdb.exe` 로 직접 열기 | 열리지 않음 |
-| PowerShell 의 `claude`(CLI) | `.claude.json` 의 서버를 **자기 프로세스로 따로** 띄움 → 원본에 붙이면 잠금 충돌 `[확정 — CLI 로그의 서버 기동 메시지]` |
 | 탐색기·PowerShell 로 파일 복사 | 복사 안 됨 `[확정 — 강사 PC 실측]` |
 
-다른 프로세스가 원본 파일을 바이트로 읽으려 할 때 나는 오류 예시입니다 `[확정 — 2026-10-01 강사 PC 실측, 경로만 수강생 기준으로 표기]`:
+다른 프로그램이 원본 파일을 열려고 할 때 나는 오류 예시입니다 `[확정 — 2026-10-01 강사 PC 실측, 경로만 수강생 기준으로 표기]`:
 
 ```
 IO Error: Cannot open file "C:\AI\경매창고.duckdb": 다른 프로세스가 파일을 사용 중이기 때문에 프로세스가 액세스 할 수 없습니다.
@@ -574,18 +490,6 @@ File is already open in ...\python.exe (PID ○○○○○)
 - 앱 안(Chat·Cowork·Code 탭)에서만 쓰면 따로 할 일이 없습니다
 - `duckdb.exe` 로 직접 열어 볼 때는 Claude 앱을 트레이까지 완전히 끄고 연 뒤, 보고 나서 닫습니다 `[추정 — ② 근거]`
 - 창고 파일을 복사해 두려면 탐색기 복사 대신 [8절](#8-백업) 의 `EXPORT DATABASE` 로 합니다
-- 같은 이름의 MCP 를 `claude_desktop_config.json` 과 `.claude.json` **양쪽에 두지 않습니다.** 강사 PC 에서 Code 탭에 두 서버가 함께 떠 「Read-only」 안내가 보였지만 실제 쿼리는 원본으로 갔습니다 `[확정 — 강사 Code 탭 실측]`
-
-### ④ 자주 틀리는 곳
-
-| # | 함정 | 증상 | 해결 |
-|---|---|---|---|
-| 1 | PowerShell 이 `--` 를 삼킴 | `error: unknown option '--db-path'` | `'--'` 처럼 **작은따옴표로 감쌉니다** |
-| 2 | 화면의 `PS C:\...>` 까지 복사 | `Get-Process : 'claude' 인수를…` 오류 | `PS ...>` 는 화면 표시입니다. **명령만** 입력 |
-| 3 | 앱 설정 화면이 전부 ✓ 인데 Code 는 실패 | 설정 화면은 Code 상태가 아님 `[확정 — 강사 PC]` | Code 는 Code 탭 `/mcp` 또는 `claude mcp list` 로 확인 |
-| 4 | CLI 를 원본에 **쓰기**로 연결 | 앱이 쥔 원본과 잠금 충돌 | CLI 는 사본을 읽기 전용으로 ([부록](#부록--cli-에서-같은-창고를-써야-할-때)) |
-| 5 | 같은 이름 duckdb 를 설정 파일 두 곳에 등록 | 「Read-only」 안내가 보이는데 쿼리는 원본으로 감 | 이름을 다르게 두거나 한쪽만 남기기 |
-| 6 | 큰 창고를 `COPY FROM DATABASE` **한 번에** 복제 | 중간에 멈추면 대상이 **빈 채로** 남음 (강사 PC 2026-10-01 실제 사고) | **테이블별 트랜잭션**으로 나눠 복사 |
 
 ---
 
@@ -598,9 +502,7 @@ File is already open in ...\python.exe (PID ○○○○○)
 | 루틴이 카톡 직전에 멈춘다 | 권한이 저장 안 됨 | `Run now` 로 돌리며 권한 창에 「항상 허용」 |
 | 「읽기 전용이라 쓸 수 없다」 | 쓰기 허용(read-write)이 꺼져 있음 | 3절 A-3 또는 B 의 `--read-write` |
 | 「파일이 잠겨 있다」 | `duckdb.exe` 등 다른 프로그램이 열고 있음 | 그 창을 닫고 다시 |
-| `Cannot open file ... File is already open in ...` | **앱 밖** 프로그램(`duckdb.exe`·PowerShell `claude`·파일 복사)이 앱이 쥔 원본을 열려고 함 | 앱 안(Chat·Cowork·Code 탭)에서 물어보기 · CLI 로 써야 하면 사본 ([부록](#부록--cli-에서-같은-창고를-써야-할-때)) |
-| Code 탭에 「Read-only」 안내가 보이는데 쿼리는 원본으로 감 | 같은 이름 duckdb 가 설정 파일 두 곳에 있음 | 이름을 다르게 두거나 한쪽만 남기기 ([12절](#12-창고를-여러-곳에서-같이-쓸-때)) |
-| CLI 의 사본 연결이 갑자기 실패 | 사본 갱신 뒤 `DETACH` 누락 | 「duckdb_databases() 에 snap 이 남았으면 DETACH 해줘」 |
+| `Cannot open file ... File is already open in ...` | **앱 밖** 프로그램(`duckdb.exe`·파일 복사)이 앱이 쥔 원본을 열려고 함 | Claude 앱 안에서 물어보기. 직접 열어야 하면 앱을 트레이까지 끄고 열기 ([12절](#12-창고를-여러-곳에서-같이-쓸-때)) |
 | 방법 B 후 **모든 MCP 가 안 붙음** | 설정 파일 문법 오류 (`\` 한 번, 쉼표 누락) | 백업본으로 되돌리고 다시 |
 | `spawn uvx ENOENT` | uv 가 설치되지 않음 | uv 설치 또는 방법 A 사용 |
 | 실거래가 적재가 「조합 부족」으로 멈춤 | 18개 중 빠진 파일이 있음 | 카톡에 적힌 빠진 조합만 다시 받아 넣고 `Run now` |
@@ -613,97 +515,6 @@ File is already open in ...\python.exe (PID ○○○○○)
 - **유료 사이트에서 받은 목록**(02단원 결과)은 창고에 넣어도 **남에게 나눠 주면 안 됩니다.** 창고 파일째 공유하지 마세요.
 - 실거래가 중앙값은 **표본 수**와 함께 보세요. 10건 미만 동네의 숫자는 믿기 어렵습니다.
 - AI 분석은 검토 출발점입니다. 실제 입찰 전 등기부·매각물건명세서 원문과 전문가 확인이 필요합니다.
-
----
-
-## 부록 — CLI 에서 같은 창고를 써야 할 때
-
-> PowerShell 의 `claude`(CLI)는 `.claude.json` 의 서버를 **자기 프로세스로** 띄우므로, 앱이 쥔 원본에 붙으면 잠금 충돌이 납니다(12절 ②).
-> CLI 로도 창고를 봐야 할 때만 **읽기 전용 사본**을 만듭니다. 데스크탑 앱만 쓴다면 이 부록은 필요 없습니다. 강사 환경도 CLI 에서 쓰는 곳이 없어 사본을 폐기했습니다.
-
-```
-  쓰기 연결          ┌──────────────────────────────┐
-  (데스크탑 앱)  →   │ C:\AI\경매창고.duckdb  (원본)  │
-                     └───────────────┬──────────────┘
-                                     │ 필요할 때: ATTACH → 비우기 → 복사 → 대조 → DETACH
-                                     ▼
-  읽기 전용 연결     ┌──────────────────────────────┐
-  (PowerShell CLI) → │ C:\AI\경매창고_사본.duckdb     │
-                     └──────────────────────────────┘
-```
-
-| | 원본 | 사본 |
-|---|---|---|
-| 붙이는 쪽 | 데스크탑 앱 (Chat·Cowork·Code 탭) | PowerShell `claude`(CLI) |
-| 모드 | 쓰기 | 읽기 전용 |
-| 최신성 | 실시간 | 마지막으로 다시 만든 날 |
-
-**STEP 1 — 사본 만들기** (데스크탑 앱 세션에서)
-
-```
-경매창고를 C:\AI\경매창고_사본.duckdb 로 통째 복사해줘.
-ATTACH → COPY FROM DATABASE → DETACH 순서로 하고, 끝나면 사본이 붙은 채로 남지 않았는지 duckdb_databases() 로 확인해줘
-```
-
-Claude 가 쓰는 SQL 은 이런 모양입니다 (원본 이름은 `경매창고` 로 가정 — 이름은 파일 이름에서 확장자를 제외한 값입니다 `[확정 — 강사 PC 조회]`):
-
-```sql
-ATTACH 'C:\AI\경매창고_사본.duckdb' AS snap;
-COPY FROM DATABASE 경매창고 TO snap;
-DETACH snap;
-```
-
-> [!WARNING]
-> **여기서 많이 막힙니다.**
-> - 창고가 크면 `COPY FROM DATABASE` 한 번 대신 **테이블마다 따로(테이블별 트랜잭션)** 복사하게 시키세요. 한 번에 하다 중간에 멈추면 사본이 **빈 채로** 남습니다 (강사 PC 2026-10-01 실제 사고).
-> - 도구 답이 「Request timed out」으로 끝나면 복사가 끝났는지 알 수 없습니다. 끝까지 된 적(강사 PC 2.3GiB)도 있지만, 반드시 **STEP 2 대조로** 판정하세요. 1분쯤 기다린 뒤 확인합니다.
-> - **`DETACH` 를 빠뜨리면** 앱의 쓰기 연결이 사본까지 쥐고 있어, CLI 의 사본 연결이 실패합니다.
-
-**STEP 2 — 대조** (불일치 0 이어야 성공)
-
-```sql
-ATTACH 'C:\AI\경매창고_사본.duckdb' AS snap (READ_ONLY);
-
-WITH a AS (SELECT schema_name s, table_name t, estimated_size r, column_count c FROM duckdb_tables() WHERE database_name='경매창고'),
-     b AS (SELECT schema_name s, table_name t, estimated_size r, column_count c FROM duckdb_tables() WHERE database_name='snap')
-SELECT count(*) AS 불일치_테이블 FROM a FULL JOIN b USING (s,t)
-WHERE a.r IS DISTINCT FROM b.r OR a.c IS DISTINCT FROM b.c;
-```
-
-큰 테이블 하나는 정확한 건수로 한 번 더 확인합니다 → 「실거래_아파트_매매 건수를 원본과 사본에서 각각 세어 비교해줘」. 끝나면 `DETACH snap;`
-
-> [!TIP]
-> SQL 여러 문장을 한 번에 보내면 **마지막 문장(`DETACH`) 결과만** 돌아와 조회 결과가 안 보입니다. 결과가 필요한 조회는 **한 문장씩** 시키세요.
-
-**STEP 3 — CLI 에 사본을 읽기 전용으로 연결** (명령어 창 · PowerShell) `[검증필요 — 수강생 PC 실측 전]`
-
-```powershell
-claude mcp add duckdb-snapshot -s user '--' uvx mcp-server-motherduck --db-path "C:\AI\경매창고_사본.duckdb"
-claude mcp list
-```
-
-- `--read-write` 를 **붙이지 않습니다** → 읽기 전용 + 질문할 때만 열고 닫기
-- `-s user` = 모든 폴더(프로젝트)에서 쓰기. 등록은 `.claude.json` 에 들어가고 **Code 탭에도 함께 보입니다** → 이름을 `duckdb` 가 아닌 `duckdb-snapshot` 으로 **다르게** 둡니다(11절 ④ · 12절 ④-5)
-- `claude mcp list` 에 `duckdb-snapshot: ... ✔ Connected` 가 나오면 성공
-- 강사 PC 는 `uvx` 대신 설치해 둔 실행 파일 경로로 등록해 ✔ 를 확인했습니다 `[확정]`
-
-**STEP 4 — 사본 다시 만들기를 루틴에 넣기** (CLI 로 계속 볼 때만) — 10절 `warehouse-monthly` 지침의 [5. 카톡 보고] **앞에** 넣습니다
-
-```
-[4-1. 사본 다시 만들기]
-- 2번 적재를 했으면 사본 C:\AI\경매창고_사본.duckdb 를 다시 만든다
-- 사본을 ATTACH 한 뒤 뷰 → 매크로 → 테이블 순으로 모두 지운다
-- 테이블마다 한 트랜잭션으로 복사한다. COPY FROM DATABASE 한 번으로 하지 않는다 (중간에 멈추면 사본이 빈 채로 남는다)
-- 복사 뒤 03단원 부록 STEP 2 대조로 판정한다. 시간 초과가 나와도 대조 결과로만 판정한다
-- 끝나면 DETACH 하고 duckdb_databases() 에 snap 이 남지 않았는지 확인한다
-- 카톡 보고에 「사본: 불일치 0」 또는 실패 사유를 덧붙인다
-```
-
-> [!NOTE]
-> 「새 파일로 만든 뒤 이름을 맞바꾸는」 방법을 쓰지 않는 이유 — DuckDB SQL 로는 파일 이름을 고치거나 지울 수 없고, `COPY FROM DATABASE` 는 **비어 있는 대상**에만 됩니다 `[확정 — 강사 PC 실측]`. 그래서 사본 안을 비우고 다시 채웁니다.
-
-> [!IMPORTANT]
-> 사본은 **마지막으로 다시 만든 날의 자료 · 조회 전용**입니다. 최신 자료는 데스크탑 앱에서 물어보세요.
 
 ---
 
@@ -720,7 +531,6 @@ claude mcp list
 - duckdb.org/install — 현재 버전 1.5.5 · Windows CLI zip · `winget install DuckDB.cli` · Visual C++ 재배포 패키지 필요 (2026-09-28 조회)
 - github.com/motherduckdb/mcp-server-motherduck — 기본 읽기 전용 · `--read-write` · Claude Desktop 용 `.mcpb` · `spawn uvx ENOENT` 대처 (2026-09-28 조회)
 - 실거래가 받는 순서·함정: duckdb-realestate-kr 운영 기록 (2026-09-22)
-- duckdb.org/docs/current/sql/statements/copy — `COPY FROM DATABASE ... TO` 는 붙여 둔 DB 끼리 스키마·매크로·데이터 전체 복사 (2026-10-01 조회)
-- 12절·부록: mcp-server-motherduck 1.0.7 소스 database.py 86–90·100–114·214–236·315–324줄(쓰기 모드는 첫 쿼리 때 연결해 유지, 읽기 전용은 쿼리마다 열고 닫음) 강사 확인 · Code 탭 duckdb_databases() 원본 연결 · Code 세션 증가 시 원본 서버 프로세스 불변 · Code 탭 MCP 로그 duckdb 실패 없음 · CLI 로그 서버 기동 메시지 · 같은 이름 이중 등록 시 「Read-only」 안내와 원본 쿼리 · 잠금 오류 문구 · 일괄 복제 중단 사고 · 대조 불일치 0 · 비어 있는 대상에만 복사됨 · PowerShell `'--'` — 강사 PC 실측 (2026-10-01)
-- 11절: code.claude.com/docs/en/desktop 「MCP servers from the Claude Desktop chat app」(Code 탭 로컬 세션은 claude_desktop_config.json 과 ~/.claude.json 을 함께 로드, 같은 이름이면 claude_desktop_config.json 정의 사용, 단독 CLI 는 claude_desktop_config.json 을 읽지 않음) · code.claude.com/docs/en/mcp(`--` 구분자, `-s user`, add-from-claude-desktop 은 macOS·WSL 전용) (2026-10-01 조회) · 강사 PC 실측 claude mcp list 출력·MCP 로그 (2026-09-30~10-01)
+- 12절: mcp-server-motherduck 1.0.7 소스 database.py 86–90·100–114·214–236·315–324줄(쓰기 모드는 첫 쿼리 때 연결해 유지, 읽기 전용은 쿼리마다 열고 닫음) 강사 확인 · Code 탭 duckdb_databases() 원본 연결 · Code 세션 증가 시 원본 서버 프로세스 불변 · Code 탭 MCP 로그 duckdb 실패 없음 · 잠금 오류 문구 · 파일 복사 차단 — 강사 PC 실측 (2026-10-01)
+- 11절: code.claude.com/docs/en/desktop 「MCP servers from the Claude Desktop chat app」(Code 탭 로컬 세션은 claude_desktop_config.json 의 MCP 를 로드) · code.claude.com/docs/en/desktop-scheduled-tasks(로컬 루틴은 Config files and connectors) (2026-10-01 조회) · 강사 PC Code 탭 실측(설정 파일 서버 31개 모두 연결, .claude.json 같은 이름 사본 정리 후 연결 오류 0건) (2026-10-01)
 - 자료별 받는 곳: 공공데이터포털 주택 공시가격 정보(data.go.kr/data/3073746) · 건축HUB 건축데이터 개방(hub.go.kr) · 국토부 실거래가 공개시스템(rt.molit.go.kr/pt/xls/xls.do) (2026-09-28 기준 강사 운영 기록)
