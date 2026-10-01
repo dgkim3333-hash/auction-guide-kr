@@ -3,7 +3,7 @@
 05단원에서 붙인 것 위에 **필수 2개**를 더하고, 나머지는 **선택**입니다.
 선택 MCP가 없어도 분석은 멈추지 않습니다 — 해당 값을 「미조회 `[검증필요]`」로 두고 진행하도록 스킬이 짜여 있습니다.
 
-## 한눈에
+## $\color{#d97757}{\textsf{한눈에}}$
 
 | 구분 | MCP | 어디서 | 쓰는 스킬 | 없으면 |
 |---|---|---|---|---|
@@ -31,7 +31,7 @@
 
 ---
 
-## 추가 필수 1 — Word MCP (`word`)
+## $\color{#d97757}{\textsf{추가 필수 1 — Word MCP (word)}}$
 
 의향서(.docx)와 명도 서류를 만듭니다. 05단원 설정 파일 완성본에 이미 들어 있습니다. 없으면 아래를 `mcpServers` 안에 추가합니다.
 
@@ -43,13 +43,13 @@
 }
 ```
 
-## 추가 필수 2 — Excel MCP
+## $\color{#d97757}{\textsf{추가 필수 2 — Excel MCP}}$
 
 NPL수익률.xlsx 를 셀 단위로 채우고 서식을 읽어 검증합니다. **확장 프로그램(.mcpb)** 으로 설치합니다.
 설치 방법은 [claude-guide-kr 05단원](https://github.com/dgkim3333-hash/claude-guide-kr/blob/main/05_MCP와API.md) 의 Excel MCP 항목을 따르세요.
 Windows Excel 이 설치돼 있어야 하고, 작업 중에는 **그 파일을 Excel 에서 닫아 두어야** 합니다.
 
-## 추가 선택 — naver-search
+## $\color{#d97757}{\textsf{추가 선택 — naver-search}}$
 
 법인 채무자 뉴스 정황 보조입니다. 공개 패키지가 있습니다 — 네이버 개발자센터에서 검색 API 키를 발급받습니다.
 
@@ -65,7 +65,7 @@ Windows Excel 이 설치돼 있어야 하고, 작업 중에는 **그 파일을 E
 
 ---
 
-## 설정 파일 완성본
+## $\color{#d97757}{\textsf{설정 파일 완성본}}$
 
 [claude_desktop_config_NPL.json](claude_desktop_config_NPL.json) — 05단원 완성본에 `word`·`duckdb`(창고)를 합친 것입니다.
 `<< >>` 자리에 본인 키를 넣습니다. 설정 파일 전체를 남에게 보내지 마세요 — 키가 평문입니다.
@@ -75,7 +75,7 @@ Windows Excel 이 설치돼 있어야 하고, 작업 중에는 **그 파일을 E
 
 ---
 
-## 붙었는지 확인
+## $\color{#d97757}{\textsf{붙었는지 확인}}$
 
 새 작업을 열고 순서대로:
 
