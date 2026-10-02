@@ -3,11 +3,10 @@ name: "post-auction-loan-simulator"
 description: "NPL 매입 후·직접 낙찰 후 담보대출 3시나리오(보수·중립·공격) 비교 시뮬레이션. 차주 유형별 LTV·금리(ECOS 시장금리 벤치마크), 월 원리금·순현금흐름·DSCR·자기자본 IRR, 민감도, 임계 LTV, 세후 IRR(real-estate-tax-calculator 연동). 금액은 원 단위 풀 콤마. 산출은 항상 수식 기반 Excel. 트리거: 낙찰 후 대출 시뮬레이션, LTV/DSR 시뮬레이션, 레버리지 비교, DSCR 분석, 임계 LTV, 자금조달 시나리오."
 ---
 
-> **수강생판 안내 (2026-09-29)** — 강사의 운영 스킬을 경로·식별정보만 바꿔 옮긴 것입니다.
-> - 작업 루트 `C:\AI\NPL\` · 실거래 창고 `C:\AI\경매창고.duckdb`(03단원에서 만든 것) · 회사명·법인번호는 `[내 회사명]`·`[법인등록번호]` 로 비워 두었습니다.
-> - 본문에 나오는 `ggi-collect` · `ggi-running-collect` · `ggi-interest-npl-scan` · `suhyup-npl-daily-scan` · `coefficient-auto-update` · `coefficient-self-diagnosis` · `bid-win-curve` · 예약작업은 **강사 운영 환경 전용**이라 수강생판에 없습니다. 그 줄은 「강사는 이렇게 자동화한다」로 읽고 넘어가면 됩니다.
-> - `00_시장데이터\` 아래 낙찰 DB·계수이력·수집 스크립트는 강사 사내 자산입니다. 없으면 본문의 **고정 계수표 [추정]** 를 씁니다.
-> - 실제 사건은 A사건·B사건·A물건처럼 익명화했습니다.
+> **수강생판 안내 (2026-10-02)** — 강사가 실제로 쓰는 스킬을 경로·회사 식별정보만 바꿔 옮긴 것입니다.
+> - 작업 루트 `C:\AI\NPL\` · 실거래 창고 `C:\AI\경매창고.duckdb`(03단원) · 회사명·법인번호·연락처는 `[내 회사명]`·`[법인등록번호]`·`[연락처]` 로 비워 두었습니다.
+> - `ggi-*`(지지옥션) · `suhyup-*`·`shinhyup-*` · `lender-auction-radar` · `coefficient-*` · `bid-win-curve` · `pipeline-health-check` 와 예약작업은 **유료 사이트 로그인·강사 사내 DB·수집 스크립트가 전제**입니다. 저장소에 함께 올렸지만 그 환경이 없으면 그대로는 돌지 않습니다.
+> - `00_시장데이터\` 아래 낙찰 DB·계수이력·수집 스크립트(`calc_coeff.py`·`load_ggi_csv.py` 등)는 강사 사내 자산이라 저장소에 없습니다. 없으면 본문의 **고정 계수표 [추정]** 를 씁니다.
 
 # Post-Auction Loan Simulator 스킬
 
