@@ -67,3 +67,4 @@ mcp__PDF_Tools__fetch_pdf_from_url(
 | 날짜 | 내용 |
 |---|---|
 | 2026-09-26 | 신설 — 동부2계 2026타경163 수집 중 curl 차단·PDF Tools 폴더 제한·VBA 복사 차단을 겪고 Downloads 연결 후 복사로 해결한 절차를 정리 |
+
