@@ -3,11 +3,10 @@ name: "trust-npl-routine"
 description: "담보신탁 NPL 단건 매입 검토 1주 Stage-Gate 루틴. Intake → G1 즉시반려 → G2 권리·임차인·당해세 → G3 수탁자 타진 → G3.5 국토부 시세 → G4 배분·IRR → G5 매입가·실패유형 교차점검 → 매수의향서. trust-npl-analysis·npl-analysis·npl-purchase-letter·real-estate MCP를 오케스트레이션. 트리거: 신탁NPL 루틴, 신탁NPL Stage-Gate, 담보신탁 매입 루틴, [폴더명] 신탁 루틴 실행."
 ---
 
-> **수강생판 안내 (2026-09-29)** — 강사의 운영 스킬을 경로·식별정보만 바꿔 옮긴 것입니다.
-> - 작업 루트 `C:\AI\NPL\` · 실거래 창고 `C:\AI\경매창고.duckdb`(03단원에서 만든 것) · 회사명·법인번호는 `[내 회사명]`·`[법인등록번호]` 로 비워 두었습니다.
-> - 본문에 나오는 `ggi-collect` · `ggi-running-collect` · `ggi-interest-npl-scan` · `suhyup-npl-daily-scan` · `coefficient-auto-update` · `coefficient-self-diagnosis` · `bid-win-curve` · 예약작업은 **강사 운영 환경 전용**이라 수강생판에 없습니다. 그 줄은 「강사는 이렇게 자동화한다」로 읽고 넘어가면 됩니다.
-> - `00_시장데이터\` 아래 낙찰 DB·계수이력·수집 스크립트는 강사 사내 자산입니다. 없으면 본문의 **고정 계수표 [추정]** 를 씁니다.
-> - 실제 사건은 A사건·B사건·A물건처럼 익명화했습니다.
+> **수강생판 안내 (2026-10-02)** — 강사가 실제로 쓰는 스킬을 경로·회사 식별정보만 바꿔 옮긴 것입니다.
+> - 작업 루트 `C:\AI\NPL\` · 실거래 창고 `C:\AI\경매창고.duckdb`(03단원) · 회사명·법인번호·연락처는 `[내 회사명]`·`[법인등록번호]`·`[연락처]` 로 비워 두었습니다.
+> - `ggi-*`(지지옥션) · `suhyup-*`·`shinhyup-*` · `lender-auction-radar` · `coefficient-*` · `bid-win-curve` · `pipeline-health-check` 와 예약작업은 **유료 사이트 로그인·강사 사내 DB·수집 스크립트가 전제**입니다. 저장소에 함께 올렸지만 그 환경이 없으면 그대로는 돌지 않습니다.
+> - `00_시장데이터\` 아래 낙찰 DB·계수이력·수집 스크립트(`calc_coeff.py`·`load_ggi_csv.py` 등)는 강사 사내 자산이라 저장소에 없습니다. 없으면 본문의 **고정 계수표 [추정]** 를 씁니다.
 
 # 담보신탁 NPL 분석 루틴 (Stage-Gate 6단계)
 
