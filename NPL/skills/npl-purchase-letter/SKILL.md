@@ -303,7 +303,7 @@ assert 계약금 == int(매수금액 * 0.1)
 이 도구들은 승인 팝업을 띄우는데, 무인 회차에는 응답할 사람이 없어
 `AbortError: Tool permission stream closed before response received` 로 **회차가 통째로 끊긴다.**
 
-2026-09-08 실사고: `suhyup-npl-daily-scan` 회차가 이 경로로 멈추다.
+2026-09-08 실사고: `suhyup-npl-daily-scan` 회차가 이 경로로 멈췄다.
 그 시점에 `_처리이력.json` 이 저장 전이어서, 다음 회차에 같은 공고를 신규로
 재처리할 뻔했다(산출물 중복 생성 + 마스터 중복 등재).
 
