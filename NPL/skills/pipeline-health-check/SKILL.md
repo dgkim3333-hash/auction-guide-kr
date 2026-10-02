@@ -71,7 +71,7 @@ Windows 작업 스케줄러 「지지옥션 DB적재」 : 매일 16:30 · 매주
 | `lender-auction-radar-weekly` | `0 14 * * 5` | **9일 초과** | 무관 |
 | `pipeline-health-thu` | `0 9 * * 4` | 이 점검 자신 | — |
 
-`enabled: false` 인 작업이 있으면 **왜 껍는지** 확인한다.
+`enabled: false` 인 작업이 있으면 **왜 껐는지** 확인한다.
 1회성 작업(`fireAt`)이 끝나고 `enabled: false` 로 남은 것은 정상이다.
 
 **등록 여부는 `list_scheduled_tasks` 로만 판정한다.**
@@ -85,7 +85,7 @@ Windows 작업 스케줄러 「지지옥션 DB적재」 : 매일 16:30 · 매주
 | | 실제 |
 |---|---|
 | 프롬프트 실제 위치 | `%USERPROFILE%\Documents\Claude\Scheduled\<taskId>\SKILL.md` |
-| `臾모꽌` 의 정체 | "문서"의 UTF-8 바이트를 CP949 로 읽은 것. **실제로 존재하는 별도 폴더**다 |
+| `臾몄꽌` 의 정체 | "문서"의 UTF-8 바이트를 CP949 로 읽은 것. **실제로 존재하는 별도 폴더**다 |
 | 진짜 `문서\Claude\Scheduled\` | 무관한 옛 폴더 3개뿐 (`1` · `estate-and-auction` · `us-stock`) |
 | bash 마운트 | **`문서\Claude` 만 연결된다.** 셸로 찾으면 「없음」이 나온다 — 이것이 오진의 출처다 |
 | 읽기 | `list_scheduled_tasks` 가 돌려주는 `path` 를 **그대로** `Read` 에 넣는다 |
