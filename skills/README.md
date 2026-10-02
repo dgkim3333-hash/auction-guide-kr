@@ -22,7 +22,7 @@
 
 | 폴더 | 스킬 이름 | 언제 쓰나 | 함께 있는 파일 |
 |---|---|---|---|
-| [court-newlist-collect/](court-newlist-collect/SKILL.md) | court-newlist-collect | 서울·경기 15개 법원 **신건**을 JSON API로 모아 02단원 신건레이더 엑셀로 — 용도군 선택(기본 전체: 주거·업무상업·산업복합·토지, 2026-09-30) | `collect.js`(브라우저 콘솔용) · `build_rows.py`(원자료 변환) |
+| [court-newlist-collect/](court-newlist-collect/SKILL.md) | court-newlist-collect | 서울·경기 15개 법원 **신건**을 JSON API로 모아 02단원 신건레이더 엑셀로 — 용도군 선택(기본 전체: 주거·업무상업·산업복합·토지, 2026-09-30) (월 1회 · 둘째 달부터 마스터에 없는 유찰 1회 포함) | `collect.js`(브라우저 콘솔용) · `build_rows.py`(원자료 변환) |
 | [court-case-docs/](court-case-docs/SKILL.md) | court-case-docs | 사건번호 하나 → 감정평가서·매각물건명세서·현황조사서(사진)·사건내역·기일내역·문건송달내역 PDF | `html_to_pdf.py`(화면 표 → A4 PDF) |
 
 > [!NOTE]

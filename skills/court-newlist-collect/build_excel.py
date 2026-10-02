@@ -6,7 +6,7 @@ build_rows.py 가 만든 CSV → 02단원 3절 규격의 신건레이더 엑셀 
   1단계  python build_excel.py stage1 court_newlist_YYYYMMDD.csv --out 신건레이더_YYYYMMDD.xlsx [--title "..."]
          → 값·헤더·서식·행 높이·열 폭·보조열 수식·틀고정을 openpyxl 로 쓴다. 표·수식·슬라이서는 아직 없다.
          → 끝에 2단계에서 Excel MCP 에 넣을 값(표 범위·수식·슬라이서 목록)을 JSON 으로 출력한다.
-  2단계  Excel MCP (SKILL.md STEP 4) — 표 생성 → C4:C9 수식 → A15 스필 수식 → 슬라이서 8개 → 저장·닫기
+  2단계  Excel MCP (SKILL.md STEP 4) — 표 생성 → C4:C9 수식 → A15 스필 수식 → 슬라이서 9개 → 저장·닫기
   3단계  python build_excel.py patch 신건레이더_YYYYMMDD.xlsx
          → 슬라이서를 144×170pt 절대 좌표로, 머리글을 열 이름으로 바꾸고 검사한다. 검사 실패면 원본을 건드리지 않는다.
 
@@ -19,12 +19,12 @@ from datetime import date
 FONT = "맑은 고딕"
 TOPHDR = 14
 TABLE = "TBL_new"
-# (열이름, 폭) — build_rows.py 출력 19열 + 연번
+# (열이름, 폭) — build_rows.py 출력 20열 + 연번 (구분 = 신건/유찰1회, 2026-10-02 추가)
 HEAD = [('연번', 6), ('사건번호', 14), ('법원', 10), ('매각기일', 12), ('소재지', 44), ('용도', 14),
         ('감정가', 16), ('최저가', 16), ('최저가율', 9), ('건물면적', 10), ('토지면적', 10), ('조회수', 8),
         ('비고', 18), ('시도', 7), ('시군구', 10), ('용도군', 10), ('감정가 규모대', 28), ('남은 날', 12),
-        ('조회수 구간', 22), ('신규', 7)]
-SLICERS = [('SL_A', '용도군'), ('SL_B', '용도'), ('SL_C', '시도'), ('SL_D', '시군구'), ('SL_E', '법원'),
+        ('조회수 구간', 22), ('신규', 7), ('구분', 9)]
+SLICERS = [('SL_I', '구분'), ('SL_A', '용도군'), ('SL_B', '용도'), ('SL_C', '시도'), ('SL_D', '시군구'), ('SL_E', '법원'),
            ('SL_F', '감정가 규모대'), ('SL_G', '남은 날'), ('SL_H', '조회수 구간')]
 EMU, TOP, W, H, LEFT0, GAP = 12700, 48, 144, 170, 620, 160
 
@@ -46,6 +46,7 @@ def stage1(a):
         for k in ('최저가율', '건물면적', '토지면적'): d[k] = float(d[k]) if d[k] else None
         d['매각기일'] = date.fromisoformat(d['매각기일']) if d['매각기일'] else None
         d['조회수'] = None
+        d.setdefault('구분', '신건')                       # 2026-10-02 이전 CSV(구분 열 없음)는 전부 신건
         recs.append(d)
     N, NC = len(recs), len(HEAD)
     RAWHDR = 500 if N <= 420 else ((N + 80) // 100 + 1) * 100      # 02단원 [3] 원본 표 위치 규칙
@@ -58,7 +59,9 @@ def stage1(a):
     wb = Workbook(); ws = wb.active; ws.title = '탐색'
     m8 = re.search(r"(\d{8})", a.csv)
     ymd8 = m8.group(1) if m8 else date.today().strftime("%Y%m%d")
-    title = a.title or ('신건레이더 %s — 법원경매정보(무료) · 전체 용도군 신건 %d건 (조회수는 법원경매정보 미제공)' % (ymd8, N))
+    n_new = sum(1 for d in recs if d['구분'] == '신건')
+    if n_new == N: title = a.title or ('신건레이더 %s — 법원경매정보(무료) · 전체 용도군 신건 %d건 (조회수는 법원경매정보 미제공)' % (ymd8, N))
+    else: title = a.title or ('신건레이더 %s — 법원경매정보(무료) · 전체 용도군 %d건 (신건 %d · 유찰1회 %d) (조회수는 법원경매정보 미제공)' % (ymd8, N, n_new, N - n_new))
     ws['B1'] = title; ws['B1'].font = Font(name=FONT, bold=True, size=14, color='1F4E79')
     ws['B2'] = '▼ 위 슬라이서를 눌러 조건을 좁히십시오. 선택 결과는 아래 15행부터 전부 표시됩니다. (해제: 슬라이서 우측 상단 지우개 아이콘)'
     ws['B2'].font = Font(name=FONT, size=9, color='595959')
@@ -157,7 +160,7 @@ def patch(a):
         "부품 수 동일": len(za.namelist()) == len(zb.namelist()),
         "twoCellAnchor 잔여 0": dr.count('twoCellAnchor') == 0,
         f"cx/cy 144×170pt {n_sl}개": dr.count('cx="1828800" cy="2159000"') == n_sl,
-        "슬라이서 8개": n_sl == 8,
+        f"슬라이서 {len(SLICERS)}개": n_sl == len(SLICERS),
         "Requires sle15 보존": sum(zb.read(n).decode().count('Requires="sle15"') for n in zb.namelist() if n.endswith('.xml')) == n_sl,
     }
     for k, v in checks.items(): print(("PASS " if v else "FAIL ") + k)

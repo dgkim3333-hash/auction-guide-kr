@@ -4,7 +4,7 @@ court-newlist-collect / build_rows.py
 법원경매정보 원본 JSON(collect.js [D] 산출물) → 02단원 신건레이더 원자료 CSV
 
   python build_rows.py court_newlist_raw_20260930.json --out court_newlist_20260930.csv \
-      [--usage 전체|주거|업무상업|토지] [--master "{작업폴더}/_기록/_마스터_신건.csv"] [--exclude-known]
+      [--usage 전체|주거|업무상업|토지] [--master "{작업폴더}/_기록/_마스터_신건.csv"] [--exclude-known] [--max-yuchal 1]
 
 규칙 출처
 - 물건 묶기·시도 판정      : 09단원 3절 (2026-09-29 실측 [확정])
@@ -18,9 +18,13 @@ court-newlist-collect / build_rows.py
   업무상업 02단원과 같은 범위 (근린주택 · 업무시설 · 집합상가 · 근린상가 · 오피스텔(업무) · 기타상업)
   토지     건물 목록이 없는 토지만 (지목이 용도가 된다)
 
-출력 열 (02단원 3절 [1] 12열 + 슬라이서용 3열 + 구간 3열 + 신규 1열)
+--max-yuchal (기본 0 = 신건만)
+  1 이면 유찰 1회 물건도 담는다 (2026-10-02 강사 결정: 월 1회 수집 시 신건으로 못 본 물건을 유찰 1회로 잡는다).
+  「구분」 열 = 신건 / 유찰1회. 최저가는 사이트 값 그대로 — 저감률(20%/30%)은 따로 판정하지 않는다.
+
+출력 열 (02단원 3절 [1] 12열 + 슬라이서용 3열 + 구간 3열 + 신규 1열 + 구분 1열)
   사건번호, 법원, 매각기일, 소재지, 용도, 감정가, 최저가, 최저가율, 건물면적, 토지면적, 조회수, 비고,
-  시도, 시군구, 용도군, 감정가 규모대, 남은 날, 조회수 구간, 신규
+  시도, 시군구, 용도군, 감정가 규모대, 남은 날, 조회수 구간, 신규, 구분
 """
 import argparse, csv, json, os, re, sys
 from collections import defaultdict
@@ -174,6 +178,7 @@ def main():
     ap.add_argument("--exclude-known", action="store_true", help="마스터에 있는 물건은 출력에서 제외한다")
     ap.add_argument("--today", help="YYYYMMDD (기본 오늘)")
     ap.add_argument("--usage", default="전체", choices=USAGE_GROUPS, help="용도군 (기본 전체)")
+    ap.add_argument("--max-yuchal", type=int, default=0, choices=(0, 1), help="유찰 횟수 상한 (기본 0 = 신건만, 1 = 유찰 1회 포함)")
     a = ap.parse_args()
 
     today = ymd(a.today) if a.today else date.today()
@@ -197,7 +202,8 @@ def main():
     case_count = defaultdict(int)
     for (court, sano, ser), items in groups.items():
         head = items[0]
-        if str(head.get("yuchalCnt")) != "0": skipped["유찰"] += 1; continue
+        yc = str(head.get("yuchalCnt") or "").strip()
+        if not yc.isdigit() or int(yc) > a.max_yuchal: skipped["유찰"] += 1; continue
         sido = sido_of(head.get("printSt"))
         if not sido: skipped["시도"] += 1; continue
         cls = classify(items)
@@ -231,20 +237,25 @@ def main():
             "건물면적": b_area, "토지면적": l_area, "조회수": "", "비고": str(head.get("mulBigo") or "").strip(),
             "시도": sido, "시군구": sgg_of(addr), "용도군": bigcls,
             "감정가 규모대": bin_amount(gam), "남은 날": bin_days(mg, today), "조회수 구간": bin_views(None),
-            "신규": "신규" if is_new else "기존", "_키": key,
+            "신규": "신규" if is_new else "기존",
+            "구분": "신건" if str(head.get("yuchalCnt")).strip() == "0" else f"유찰{int(head.get('yuchalCnt'))}회", "_키": key,
         })
 
     # 6-3절 정렬: 매각기일 → 서울 먼저 → 법원 → 사건번호
     result.sort(key=lambda r: (r["매각기일"], 0 if r["시도"] == "서울" else 1, r["법원"], r["사건번호"]))
     cols = ["사건번호","법원","매각기일","소재지","용도","감정가","최저가","최저가율","건물면적","토지면적",
-            "조회수","비고","시도","시군구","용도군","감정가 규모대","남은 날","조회수 구간","신규"]
+            "조회수","비고","시도","시군구","용도군","감정가 규모대","남은 날","조회수 구간","신규","구분"]
     with open(a.out, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore"); w.writeheader(); w.writerows(result)
 
     bycls = defaultdict(int)
     for r in result: bycls[r["용도군"] + "/" + r["용도"]] += 1
-    print(f"원본 행 {len(rows):,} → 물건 {len(groups):,} → 신건·서울경기·{a.usage} {len(result):,}건")
-    print(f"제외: 유찰≠0 {skipped['유찰']:,} / 시도 밖 {skipped['시도']:,} / 용도 밖 {skipped['용도']:,}")
+    scope = "신건" if a.max_yuchal == 0 else f"신건+유찰{a.max_yuchal}회"
+    print(f"원본 행 {len(rows):,} → 물건 {len(groups):,} → {scope}·서울경기·{a.usage} {len(result):,}건")
+    bygb = defaultdict(int)
+    for r in result: bygb[r["구분"]] += 1
+    print("구분:", dict(sorted(bygb.items())))
+    print(f"제외: 유찰>{a.max_yuchal} {skipped['유찰']:,} / 시도 밖 {skipped['시도']:,} / 용도 밖 {skipped['용도']:,}")
     print("용도군/용도:", dict(sorted(bycls.items())), "| 신규:", sum(1 for r in result if r["신규"] == "신규"))
     print("→ 마스터 갱신은 엑셀 검사(02단원 3절 [4])가 끝난 뒤에만 한다. 이 스크립트는 마스터를 쓰지 않는다.")
 
