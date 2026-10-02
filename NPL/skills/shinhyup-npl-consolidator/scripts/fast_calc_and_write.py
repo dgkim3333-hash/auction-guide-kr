@@ -10,7 +10,7 @@
 사용법:
     python scripts/fast_calc_and_write.py <마스터파일> <출력파일> [신규파일1 신규파일2 ...]
 
-    - 신규 파일 없이 마스터 파일만 지정하면: 기존 행의 계산 컨럼만 재산정
+    - 신규 파일 없이 마스터 파일만 지정하면: 기존 행의 계산 컬럼만 재산정
     - 신규 파일을 함께 지정하면: 신규 데이터 추가 + 전체 계산 산정
 """
 
@@ -167,7 +167,7 @@ def process_master(master_path, output_path):
     wb = openpyxl.load_workbook(master_path)
     ws = wb.active
 
-    # 컨럼 인덱스 (B열=2부터 시작)
+    # 컬럼 인덱스 (B열=2부터 시작)
     COL_B_NO = 2
     COL_O_APPRAISAL = 15   # 감정가
     COL_P_BALANCE = 16      # 대출잔액
@@ -196,7 +196,7 @@ def process_master(master_path, output_path):
     print(f"📊 전체 행 수: {total_rows}, 데이터 시작: {data_start}행")
 
     for row_idx in range(data_start, total_rows + 1):
-        # 빈 행 스킵 (No. 컨럼이 비어있으면)
+        # 빈 행 스킵 (No. 컬럼이 비어있으면)
         no_val = ws.cell(row=row_idx, column=COL_B_NO).value
         if no_val is None:
             continue
@@ -236,9 +236,9 @@ def process_master(master_path, output_path):
                 notes.append(note)
 
             if interest is not None:
-                # 청구금액 - 대출잔액 = 정상이자(Q컨럼)에 전액 입력
+                # 청구금액 - 대출잔액 = 정상이자(Q컬럼)에 전액 입력
                 ws.cell(row=row_idx, column=COL_Q_NORMAL_INT).value = max(0, int(interest))
-                # R컨럼(연체이자)은 별도 연체이자 정보가 원본에 있을 때만 입력
+                # R컬럼(연체이자)은 별도 연체이자 정보가 원본에 있을 때만 입력
                 # 자동 산정에서는 건드리지 않는다
                 
                 calc_count['interest'] += 1
