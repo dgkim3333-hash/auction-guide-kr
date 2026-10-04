@@ -79,7 +79,7 @@ Claude Code(데스크탑 앱 Code 탭)는 스킬을 **`%USERPROFILE%\.claude\ski
 > **백업은 `skills\` 밖에** 둡니다(`%USERPROFILE%\.claude\skills_backup\<이름>_날짜\`). `skills\` 안에 두면 같은 스킬이 두 번 뜹니다 `[확정 — 2026-09-30 실측]`.
 
 > [!NOTE]
-> [skills_skill파일/](../skills_skill파일/) 의 `.skill` 25개는 **Cowork·웹용**이며 2026-09-29 판입니다. 2026-10-02 전체 동기화 내용과 새로 넣은 15개(`auction-property-review` + 강사 운영 14개)는 `.skill` 에 없습니다 — 폴더판을 쓰세요. Code 는 폴더를 그대로 씁니다. 두 방법으로 같은 스킬을 이중 설치하지 마세요.
+> [skills_skill파일/](../skills_skill파일/) 의 `.skill` 40개는 **Cowork·웹용**입니다(2026-10-04 판 — 이 폴더판과 같은 내용). Code 는 폴더를 그대로 씁니다. 두 방법으로 같은 스킬을 이중 설치하지 마세요.
 
 ---
 
