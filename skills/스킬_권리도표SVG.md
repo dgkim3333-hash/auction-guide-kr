@@ -43,6 +43,13 @@ def font_guard(font_family):
 
 결함 순서를 일부러 넣어 **가드가 실제로 막는지** 확인한 뒤에만 쓴다. 가드를 지우거나 우회하지 않는다.
 
+### Windows 환경 (2026-10-05 강사 실측 — cairosvg·fc-list·Noto Sans CJK KR 없음)
+
+- 첫 폰트를 `Malgun Gothic` 으로 둔다: `F = "Malgun Gothic, Noto Sans CJK KR, sans-serif"`.
+- 가드는 `fc-list` 대신 `os.path.exists(r"C:\Windows\Fonts\malgun.ttf")` 로 검사한다. 없으면 같은 방식으로 멈춘다.
+- 렌더는 Edge 헤드리스: `msedge --headless=new --disable-gpu --force-device-scale-factor=2 --screenshot=<png> --window-size=<w>,<h> <svg 파일 URL>`.
+- 「눈으로 본다」 단계는 그대로다 — 렌더 PNG를 열어 확인한다.
+
 ---
 
 ## ★ 왜 손으로 SVG를 쓰지 않는가
@@ -301,6 +308,7 @@ assert 남은재원 == 그림에_찍힌_값, "검산 실패"
 
 | 날짜 | 내용 |
 |---|---|
+| 2026-10-05 | 「Windows 환경」 절 신설 — 첫 폰트 Malgun Gothic · 가드는 malgun.ttf 존재 검사 · Edge 헤드리스 렌더 |
 | 2026-10-05 | **배당 순서 문구 정정.** 사다리 docstring 의 당해세 「0순위 배당(경매비용 다음, 근저당 앞)」 → 「집행비용·최우선변제 다음, 근저당 앞」, 최우선에 「집행비용 다음, 당해세 앞」 병기, 폭포 steps 순서 예시 추가. 근거 지방세기본법 §71①4(MST 290139)·국세기본법 §35①4(MST 289999), 2026-10-05 조회. 생성기 동작·색·assert 는 그대로 |
 | 2026-09-29 | 확신도 라벨을 저장소 공통 네 가지(확정·검증필요·추정·정보부족)로 통일 |
 | 2026-09-28 | 사다리 fate 에 `당해세`·`최우선` 추가(`D97706`). 당해세를 회색 「소멸」로 그려 배당 우선이 그림에서 사라진 결함을 막는다. 금액 없는 행은 assert 로 차단, 사다리=배당표=폭포 3자 일치 규칙 명시 |
