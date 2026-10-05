@@ -15,7 +15,10 @@ if hasattr(sys.stdout, "reconfigure"):
 
 CASE_RE = re.compile(r"\d{4}\s*타경\s*\d+|\d{4}-\d{5}-\d{3}")
 ASK_RE = re.compile(r"분석|물건카드|PPTX|pptx|매입할까|입찰가|검토|정밀")
-DELIVERABLE_RE = re.compile(r"03_산출물[\\/][^\"']*\.pptx|_card\.js|_npl_excel\.py|NPL수익률_[^\"']*\.xlsx", re.IGNORECASE)
+# 「산출물을 만들었다」 판정 (2026-10-05 오탐 수정 — 읽기용 스크립트 본문에 경로 문자열만 있어도 막히던 문제)
+DELIVERABLE_PATH_RE = re.compile(r"(03_산출물[\\/][^\\/]*\.pptx|물건카드_[^\\/]*\.pptx|_card\.js|_npl_excel\.py|NPL수익률_[^\\/]*\.xlsx)$", re.IGNORECASE)
+SHELL_BUILD_RE = re.compile(r"\bnode\b[^\n|;&]*_card\.js|\bpython[^\n|;&]*_npl_excel\.py"
+                            r"|\b(Copy-Item|Move-Item|cp|mv|copy|move)\b[^\n|;&]*(물건카드_[^\"'\s]*\.pptx|NPL수익률_[^\"'\s]*\.xlsx)", re.IGNORECASE)
 REQUIRED_SKILLS = ["npl-analysis", "auction-property-card"]
 VERIFY = os.path.join(os.path.expanduser("~"), ".claude", "hooks", "verify_property.py")
 
@@ -27,7 +30,7 @@ CHECKLIST = f"""[물건 분석 필수 절차 — property_analysis_guard 1차 �
 4. 판정: 당해세(원칙 13, 갑구 숫자 천원 단위) · 최우선변제(기준일=최선순위 담보물권) · STEP 4-C 선순위 조세 X · 21개 체크리스트 · Agent 0 저항지수
 5. 시세·입지: 창고(C:\\AI\\경매창고.duckdb) 실거래 사다리 + 추정 감정가(원칙 24) + 전월세 중앙값(원칙 25) · 서울 정비사업 인접 체크 · 역세권(건설 중 노선 포함, STEP 5-B) · 인근 낙찰 사례(00_시장데이터)
 6. 세금 4종 개인·법인: 취득세 §19② 시가표준액 안분 · 재산세 · 종부세 2027/2028 개편안 · 출구세(시점 미지정이면 미산출) · 내 세대 보유주택 공시가격 합산(지침 🔴③) · 대출 판정(법인·규제지역 주택 0원) · ECOS 금리
-7. 산출물: PPTX(결론 두 관점 나란히·세금 3장↑·도표 3종·실명 대신 A씨·201호) + 분석 엑셀(셀 수식) + NPL수익률 엑셀(npl-excel-fill-map, 템플릿 _템플릿\\NPL수익률_교육용.xlsx) + 00_물건카드.md
+7. 산출물: PPTX(결론 두 관점 나란히·세금 3장↑·도표 3종·실명 대신 A씨·201호 + 관점 2 다섯 장 = 입지(수요처·통근) · 고유 리스크(확인 방법 열) · 명도(인도명령 일정·예산) · 종합 점수(100점 배점) · 확인해야 할 것) + 분석 엑셀(셀 수식) + NPL수익률 엑셀(npl-excel-fill-map, 템플릿 _템플릿\\NPL수익률_교육용.xlsx) + 00_물건카드.md
 8. 완료 전: python "{VERIFY}" "<물건 폴더>" 실행 → 「VERIFY_PROPERTY PASS」 확인(없으면 Stop 훅이 종료를 막는다). 슬라이드는 렌더해 눈으로 확인한다."""
 
 
@@ -87,8 +90,10 @@ def analyze(objs):
                 if c.get("name") == "Skill":
                     s = str(inp.get("skill", "")).split(":")[-1]
                     all_skills.add(s); turn_skills.add(s)
-                blob = json.dumps(inp, ensure_ascii=False)
-                if DELIVERABLE_RE.search(blob) and c.get("name") in ("Write", "Edit", "PowerShell", "Bash"):
+                name = c.get("name")
+                if name in ("Write", "Edit") and DELIVERABLE_PATH_RE.search(str(inp.get("file_path", ""))):
+                    built = True
+                elif name in ("PowerShell", "Bash") and SHELL_BUILD_RE.search(str(inp.get("command", ""))):
                     built = True
             elif c.get("type") == "tool_result":
                 rc = c.get("content")
