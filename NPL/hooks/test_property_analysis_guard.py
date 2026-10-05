@@ -37,6 +37,37 @@ rc, _, err = run("stop", {"transcript_path": tr(noskill)}); cases.append(("aucti
 rc, out, _ = run("stop", {"transcript_path": tr(base), "stop_hook_active": True}); cases.append(("두 번째 종료 → 화면 경고 후 통과", rc == 0 and "systemMessage" in out))
 rc, _, _ = run("stop", {"transcript_path": tr([U("종부세 개편안 설명해줘")])}); cases.append(("분석 아닌 차례 → 통과", rc == 0))
 
+
+# ── 2026-10-05 추가: 오탐 방지 · 관점 2 다섯 장 검사 ──
+W = lambda path, content: {"type": "assistant", "message": {"role": "assistant", "content": [{"type": "tool_use", "name": "Write", "input": {"file_path": path, "content": content}}]}}
+SH = lambda cmd: {"type": "assistant", "message": {"role": "assistant", "content": [{"type": "tool_use", "name": "PowerShell", "input": {"command": cmd}}]}}
+peek = [U("두 덱 비교해줘"), W(r"C:\tmp\deck_peek.py", 'NEW = r"C:\\AI\\NPL\\x\\03_산출물\\물건카드_2025타경1.pptx"'), SH(r"python C:\tmp\deck_peek.py")]
+rc, _, _ = run("stop", {"transcript_path": tr(peek)}); cases.append(("읽기 스크립트(본문에 pptx 경로) → 통과(오탐 없음)", rc == 0))
+editcard = [U("물건 정리"), W(r"C:\AI\NPL\x\_card.js", "// 생성기"), SH("node _card.js")]
+rc, _, _ = run("stop", {"transcript_path": tr(editcard)}); cases.append(("_card.js 저장·실행 → 생성으로 판정 → 차단", rc == 2))
+try:
+    import shutil as _sh
+    from pptx import Presentation
+    from pptx.util import Inches
+    V = os.path.join(os.path.dirname(os.path.abspath(__file__)), "verify_property.py")
+    def mk(folder, text):
+        os.makedirs(os.path.join(folder, "01_원본서류")); os.makedirs(os.path.join(folder, "03_산출물"))
+        for n in ["매각물건명세서.pdf", "건물등기.pdf", "토지등기.pdf", "건축물대장.pdf", "감정평가서.pdf"]:
+            open(os.path.join(folder, "01_원본서류", n), "wb").close()
+        pr = Presentation(); sl = pr.slides.add_slide(pr.slide_layouts[5])
+        sl.shapes.add_textbox(Inches(1), Inches(1), Inches(6), Inches(4)).text_frame.text = text
+        sl.notes_slide.notes_text_frame.text = "노트"; pr.save(os.path.join(folder, "03_산출물", "물건카드_2025타경1.pptx"))
+    root = tempfile.mkdtemp()
+    a, b = os.path.join(root, "a"), os.path.join(root, "b")
+    mk(a, "배당 순서"); mk(b, "배당 순서 · 수요처 · 확인 방법 · 인도명령 · 배점")
+    oa = subprocess.run([sys.executable, V, a], capture_output=True).stdout.decode("utf-8", "replace")
+    ob = subprocess.run([sys.executable, V, b], capture_output=True).stdout.decode("utf-8", "replace")
+    cases.append(("verify 다섯 장 없는 덱 → 4개 FAIL", all(f"[FAIL] {k}" in oa for k in ["명도", "종합점수", "수요처", "고유리스크"])))
+    cases.append(("verify 다섯 장 있는 덱 → 4개 PASS", all(f"[PASS] {k}" in ob for k in ["명도", "종합점수", "수요처", "고유리스크"])))
+    _sh.rmtree(root, ignore_errors=True)
+except ImportError:
+    cases.append(("python-pptx 없음 — 검증기 시험 생략", False))
+
 ok = all(c[1] for c in cases)
 for n, r in cases:
     print(("PASS " if r else "FAIL ") + n)
