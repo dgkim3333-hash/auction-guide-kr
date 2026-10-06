@@ -14,7 +14,7 @@
 > 그 표시가 자주 거슬릴 때 ③으로 넘어가세요. MCP 를 더 붙이는 것보다 창고를 채우는 편이 빠르고 대화 분량도 아낍니다.
 
 > [!NOTE]
-> **Code 탭에도 그대로 붙습니다.** 데스크탑 앱은 `claude_desktop_config.json` 의 MCP 서버를 **Code 탭 로컬 세션에도 로드**합니다 `[확정 — code.claude.com/docs/en/desktop 2026-09-30 조회 + 강사 PC /mcp 실측]`. 이 단원대로 설정 파일에 넣으면 Chat·Cowork·Code 세 곳에서 같은 도구가 보입니다. PlayMCP 는 claude.ai 커넥터라 역시 자동입니다. `claude mcp add` 명령은 **터미널 CLI 전용**이라 이 교재에서는 쓰지 않습니다. 확인 방법은 5절.
+> **Cowork 대화·프로젝트·예약 작업에 그대로 붙습니다** — 데스크탑 앱이 켜져 있을 때 `[확정 — support.claude.com/en/articles/15520349 2026-10-06 조회 + 2026-10-06 강사 PC 실측]`. 이 단원대로 설정 파일에 넣으면 Chat·Cowork·Code 세 곳에서 같은 도구가 보입니다. PlayMCP 는 claude.ai 커넥터라 역시 자동입니다. `claude mcp add` 명령은 **터미널 CLI 전용**이라 이 교재에서는 쓰지 않습니다. 확인 방법은 5절.
 
 ---
 
@@ -218,7 +218,7 @@ uv sync
 | **2** | Claude 앱이 **꺼져 있는지** 확인 | 켜져 있으면 도우미가 멈추고 알려 줌 |
 | **3** | 시작 메뉴에서 `PowerShell` 을 열고 아래 한 줄을 붙여넣고 Enter | 「대상 파일」 과 「백업」 경로가 나옴 |
 | **4** | 자리 이름이 하나씩 나오면 해당 키를 **붙여넣고 Enter** (없는 키는 그냥 Enter 로 건너뜀) | 입력한 글자는 보이지 않음 — 정상입니다 |
-| **5** | 「채움 N개」 가 나오면 끝. Claude 를 다시 켬 | Chat: 채팅창 `+` → Connectors 에 서버가 켜져 있음 / Code: 5절 `/mcp` |
+| **5** | 「채움 N개」 가 나오면 끝. Claude 를 다시 켬 | Cowork 입력창 `+` → `Connectors` 에 서버가 켜져 있음 (5절) |
 
 ```
 powershell -ExecutionPolicy Bypass -File "C:\AI\mcp\키입력.ps1"
@@ -238,20 +238,19 @@ powershell -ExecutionPolicy Bypass -File "C:\AI\mcp\키입력.ps1"
 
 ---
 
-## $\color{#d97757}{\textsf{5. Code 탭에서 확인하기}}$
+## $\color{#d97757}{\textsf{5. Cowork 에서 확인하기}}$
 
-04·08단원 분석은 Code 탭에서 돌립니다. 설정 파일에 넣은 MCP 가 Code 에 붙었는지 아래로 확인합니다.
+04·10단원 분석과 02·03·06단원 예약 작업은 Cowork 에서 돌립니다. 설정 파일에 넣은 MCP 가 붙었는지 아래로 확인합니다.
 
 | 순서 | 할 일 | 이렇게 되면 성공 |
 |---|---|---|
 | **1** | Claude 앱을 **완전히 종료**(트레이 포함) 후 다시 켬 | 설정 파일은 앱을 켤 때 읽음 |
-| **2** | **Code 탭** → 새 세션 → 입력창에 `/mcp` | 「커넥터」 표가 뜨고 `vworld-landuse` · `datagokr` 이 **유형 「데스크톱 · 로컬 개발」 · 상태 「연결됨」**, **PlayMCP** 는 **유형 「웹」 · 「연결됨」** `[확정 — 2026-09-30 강사 PC 실측, 설정 파일 서버 전부 표시됨]` |
-| **3** | 같은 세션에서 「서울 강남구 역삼동 737 개별주택가격 알려줘」 | 가격이 나옴 |
+| **2** | Cowork **새 대화** → 입력창 왼쪽 **`+`** → **`Connectors`** | `vworld-landuse` · `datagokr` · **PlayMCP** 가 목록에 있고 켜져 있음 |
+| **3** | 같은 대화에서 「서울 강남구 역삼동 737 개별주택가격 알려줘」 | 가격이 나옴 |
 
 > [!NOTE]
-> `claude mcp list` 는 **`~\.claude.json` 에 등록한 서버만** 보여 줍니다. 설정 파일로 붙인 서버와 PlayMCP 는 여기 안 나와도 `/mcp` 에 보이면 정상입니다 `[검증필요 — 수강생 PC 실측 전]`.
-> 같은 이름의 서버가 `claude_desktop_config.json` 과 `~\.claude.json` 양쪽에 있으면 Code 탭은 **설정 파일 쪽**을 씁니다 `[확정 — 같은 문서]`.
-> 서버 이름에 공백·특수문자가 있으면 Code 에서 못 읽을 수 있습니다. 이 교재의 이름(`vworld-landuse` · `datagokr`)은 그대로 두세요.
+> 서버 이름에 공백·특수문자가 있으면 못 읽을 수 있습니다. 이 교재의 이름(`vworld-landuse` · `datagokr`)은 그대로 두세요.
+> 데스크탑 앱이 꺼져 있으면 내 PC 의 MCP(vworld-landuse · datagokr · duckdb)는 붙지 않고 PlayMCP 같은 원격 커넥터만 남습니다.
 
 ---
 
@@ -269,8 +268,8 @@ powershell -ExecutionPolicy Bypass -File "C:\AI\mcp\키입력.ps1"
 | PlayMCP 도구가 안 불린다 | 도구함 카드가 Offline · 권한이 차단 | 카드의 `MCP Online` 확인, 커넥터 권한에서 `항상 허용` |
 | 브이월드가 갑자기 안 된다 | 개발키 6개월 만료 | 브이월드에서 연장 또는 재발급 |
 | 설정을 고쳤는데 그대로다 | Claude 가 트레이에 살아 있음 | 트레이에서도 종료 후 다시 켜기 |
-| Chat 에는 보이는데 Code `/mcp` 에 없다 | Code 세션을 설정 저장 전에 열었음 | 앱 재시작 후 **새 세션** → `/mcp` |
-| Code `/mcp` 에 PlayMCP 가 없다 | Code 탭 로그인이 claude.ai 계정이 아님 | Code 탭에서 `/login` → Pro/Max 계정 (API 키 로그인이면 커넥터가 안 붙음) |
+| `Connectors` 에 서버가 있는데 꺼져 있다 | 대화마다 끌 수 있음 | 스위치를 켜고 **새 대화** |
+| 예약 작업에서만 내 PC 도구가 안 붙는다 | 그 시각에 데스크탑 앱이 꺼져 있었음 | 앱을 켠 뒤 **지금 실행** |
 
 ---
 
@@ -280,6 +279,25 @@ powershell -ExecutionPolicy Bypass -File "C:\AI\mcp\키입력.ps1"
 
 출처
 
+- support.claude.com/en/articles/15520349 — 내 PC 의 로컬 도구(MCP)는 데스크탑 앱이 켜져 있을 때 Cowork 에 붙음 (2026-10-06 조회)
 - claude-guide-kr/경매물건분석/mcp — datagokr-mcp · vworld-landuse-mcp 소스와 README (2026-09-28 조회)
 - code.claude.com/docs/en/desktop 「MCP servers from the Claude Desktop chat app」 — 설정 파일 서버가 Code 탭 로컬 세션에 로드됨, 이름 충돌 시 설정 파일 우선 (2026-09-30 조회)
 - code.claude.com/docs/en/mcp — `claude mcp add-from-claude-desktop` 은 macOS·WSL 전용 (2026-09-30 조회)
+
+---
+
+## $\color{#d97757}{\textsf{부록 — Code 탭으로 하실 분}}$
+
+**이 부록은 Code 탭을 쓰는 분만 봅니다.** 데스크탑 앱은 `claude_desktop_config.json` 의 MCP 서버를 **Code 탭 로컬 세션에도 로드**합니다 `[확정 — code.claude.com/docs/en/desktop 2026-09-30 조회 + 강사 PC /mcp 실측]`.
+
+| 순서 | 할 일 | 이렇게 되면 성공 |
+|---|---|---|
+| **1** | 앱 완전 종료 후 다시 켬 → **Code 탭** → 새 세션 → `/mcp` | 「커넥터」 표에 `vworld-landuse` · `datagokr` 이 「데스크톱 · 로컬 개발 · 연결됨」, PlayMCP 는 「웹 · 연결됨」 `[확정 — 2026-09-30 강사 PC 실측]` |
+| **2** | 같은 세션에서 「서울 강남구 역삼동 737 개별주택가격 알려줘」 | 가격이 나옴 |
+
+- `claude mcp list` 는 `~\.claude.json` 에 등록한 서버만 보여 줍니다. 설정 파일 서버와 PlayMCP 는 여기 안 나와도 `/mcp` 에 보이면 정상입니다 `[검증필요]`. 같은 이름이 양쪽에 있으면 Code 탭은 설정 파일 쪽을 씁니다.
+
+| 증상 (Code) | 해결 |
+|---|---|
+| Chat 에는 보이는데 Code `/mcp` 에 없다 | 앱 재시작 후 **새 세션** → `/mcp` |
+| Code `/mcp` 에 PlayMCP 가 없다 | Code 탭에서 `/login` → Pro/Max 계정 (API 키 로그인이면 커넥터가 안 붙음) |
