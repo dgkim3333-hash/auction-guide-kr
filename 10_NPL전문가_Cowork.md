@@ -7,6 +7,20 @@
 > **누구를 위한 것인가** — 채권 매입가를 산정하고, 매수의향서를 내고, 낙찰 후 유입까지 세금을 비교해야 하는 분. 직접 낙찰만 하실 거면 [04단원](04_분석프로젝트.md)으로 충분합니다.
 
 > [!IMPORTANT]
+> **2026-10-06 갱신 — 실패사례 점검 게이트를 넣었습니다. 이미 만든 분도 다시 받으세요.**
+> 받는 법: ① 프로젝트 「지침」 칸을 `NPL/프로젝트지침_Cowork.md` 본문으로 통째로 다시 붙여넣기 ② 3절에서 `.skill` 8개(`auction-failure-guard` 새로 + `npl-analysis` · `auction-property-review` · `auction-property-card` · `auction-bid-price` · `ggi-interest-npl-scan` · `suhyup-npl-daily-scan` · `trust-npl-analysis`) 다시 올리기 ③ 1절 3번대로 `C:\AI\NPL\_도구\verify_property.py` 다시 복사(실패점검 검사가 생긴다) ④ **새 대화**.
+>
+> | 항목 | 무엇이 달라졌나 |
+> |---|---|
+> | **새 스킬 auction-failure-guard** | 낙찰자가 실제로 손해 본 사례 118건(실제손해 55 · 경고 59 · 구제 4)을 11개 유형 점검표로. 입찰 전 · 입찰 당일 · 허가결정 전/잔금 전 3게이트 |
+> | **결론 전 마지막 게이트** | PPTX 에 「실패위험 점검표」 한 장이 없으면 미완성. 분석 스킬 7개 끝에 연결 단락 |
+> | **스킬이 안 열려도 지킬 다섯** | 실질 취득가 · 배당요구종기 직접 대조 · 소액 선순위 근저당 대위변제 · 입찰표 배율 · 재매각 이력 |
+> | **시험 결과** | 같은 문제 3개에서 스킬 사용 95.8% vs 미사용 56.5% — 문항별 평균 (강사 실측 2026-10-06) |
+> | **NPL 회수 경로 5개(모드 B)** | 제3자 입찰자 기피 · 우리 근저당 앞 배당 · 미납·재매각 반복 · 절차 기각(반려 권고) · 유입 시 모드 A 3게이트 |
+> | **학교법인 근저당 허가 분기** | 학교법인·사회복지법인·재단법인 소유면 우리 근저당이 설정 당시 주무관청 허가를 받았는지부터 확인. 허가서 없으면 반려 권고 |
+> | **검증기 실패점검 검사(총 39항목)** | 덱에 「실패위험 점검표」가 없으면 `verify_property.py` 가 FAIL |
+
+> [!IMPORTANT]
 > **08단원(Code)과 10단원(Cowork) 중 하나만 고르세요.** 같은 `C:\AI\NPL` 폴더에 `CLAUDE.md`(08단원)가 있는 채로 Cowork 프로젝트에 연결하면, Cowork 가 그 파일도 읽어 **지침이 두 벌**이 됩니다 `[확정 — 2026-10-06 강사 실측: 폴더를 연결하자 그 폴더의 CLAUDE.md 본문이 대화에 붙음]`.
 > 08단원을 하다가 이쪽으로 옮기면 `C:\AI\NPL\CLAUDE.md` 의 이름을 `CLAUDE.md.bak` 으로 바꾸세요.
 > **PC 가 켜져 있고 Claude 앱이 열려 있어야** Cowork 가 내 PC 의 폴더·창고·도구를 씁니다 `[확정 — 2026-10-06 강사 실측]`.
@@ -88,13 +102,13 @@ C:\AI\
 
 ---
 
-## $\color{#d97757}{\textsf{3. 스킬 40개 — 이 표에서 바로 내려받기}}$
+## $\color{#d97757}{\textsf{3. 스킬 41개 — 이 표에서 바로 내려받기}}$
 
-링크를 누르면 `.skill` 파일이 바로 내려받아집니다. **압축을 풀지 말고 `.skill` 파일 그대로** 앱에 넣습니다. 내용은 저장소 `NPL/skills/` 폴더판과 같습니다(2026-10-05 저녁판 포함).
+링크를 누르면 `.skill` 파일이 바로 내려받아집니다. **압축을 풀지 말고 `.skill` 파일 그대로** 앱에 넣습니다. 내용은 저장소 `NPL/skills/` 폴더판과 같습니다(2026-10-06 판 포함).
 
 **한 번에 받기**
-- [⬇ NPL_스킬_수강생용_26개.zip](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/NPL_%EC%8A%A4%ED%82%AC_%EC%88%98%EA%B0%95%EC%83%9D%EC%9A%A9_26%EA%B0%9C.zip) — **처음이면 이것.** 강사 운영 14개를 뺀 26개
-- [⬇ NPL_스킬_40개_전체.zip](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/NPL_%EC%8A%A4%ED%82%AC_40%EA%B0%9C_%EC%A0%84%EC%B2%B4.zip) — 강사 운영 스킬까지 40개 (아래 표 「강사 운영」은 유료 로그인·사내 DB 전제라 그대로는 안 돌 수 있음)
+- [⬇ NPL_스킬_수강생용_27개.zip](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/NPL_%EC%8A%A4%ED%82%AC_%EC%88%98%EA%B0%95%EC%83%9D%EC%9A%A9_27%EA%B0%9C.zip) — **처음이면 이것.** 강사 운영 14개를 뺀 27개
+- [⬇ NPL_스킬_41개_전체.zip](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/NPL_%EC%8A%A4%ED%82%AC_41%EA%B0%9C_%EC%A0%84%EC%B2%B4.zip) — 강사 운영 스킬까지 41개 (아래 표 「강사 운영」은 유료 로그인·사내 DB 전제라 그대로는 안 돌 수 있음)
 
 zip 은 풀면 `.skill` 파일들이 나옵니다. 그 `.skill` 들은 **다시 풀지 않습니다.**
 
@@ -105,6 +119,7 @@ zip 은 풀면 `.skill` 파일들이 나옵니다. 그 `.skill` 들은 **다시 
 | [⬇ auction-property-card.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/auction-property-card.skill) | **직접낙찰 건의 주 절차.** 서류 판독 → 권리 → 세금 → PPTX 물건카드 | 수강생용 |
 | [⬇ auction-property-review.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/auction-property-review.skill) | 직접낙찰 물건 검토 체크리스트 — 24개 위험항목(임차인 vs 조세 법정기일 포함) · 배당·인수금액 · 입찰 상한 · 별… | 수강생용 |
 | [⬇ auction-bid-price.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/auction-bid-price.skill) | 입찰가 범위 · 【A】【B】 계수 · 포기 판정 | 수강생용 |
+| [⬇ auction-failure-guard.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/auction-failure-guard.skill) | 결론 전 마지막 게이트 — 실패사례 11개 유형 점검표 · 직접 입찰 3게이트 · NPL 회수 경로 5개 | 수강생용 |
 | [⬇ priority-payment-date-rule.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/priority-payment-date-rule.skill) | 소액임차인 최우선변제 — 기준일 · 시기별 한도 내장표 | 수강생용 |
 | [⬇ property-tax-apportionment.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/property-tax-apportionment.skill) | 주택·근생 복합 공시가격 확보 · 세목별 안분 | 수강생용 |
 | [⬇ real-estate-tax-calculator.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/NPL/skills_skill%ED%8C%8C%EC%9D%BC/real-estate-tax-calculator.skill) | 취득세·재산세·종부세·양도세 · 세후 IRR | 수강생용 |
