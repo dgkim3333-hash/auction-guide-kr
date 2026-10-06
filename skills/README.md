@@ -3,6 +3,41 @@
 [04단원](../04_분석프로젝트.md) 프로젝트가 물건을 분석할 때 꺼내 쓰는 **업무 매뉴얼 11개**입니다.
 프로젝트 지침이 「무엇을 지킬지」라면, 스킬은 「그 일을 어떤 순서로 할지」입니다.
 
+## $\color{#d97757}{\textsf{⬇ 내려받기 — 이 화면에서 바로}}$
+
+아래 링크를 누르면 `.skill` 파일이 바로 내려받아집니다. **압축을 풀지 말고 `.skill` 파일 그대로** 씁니다.
+
+**한 번에 11개 →** [⬇ 스킬_11개_전체.zip](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/%EC%8A%A4%ED%82%AC_11%EA%B0%9C_%EC%A0%84%EC%B2%B4.zip) (이 zip 은 풀면 `.skill` 11개가 나옵니다. 그 `.skill` 들은 다시 풀지 않습니다)
+
+| 구분 | 스킬 | 스킬 이름 | 내려받기 |
+|---|---|---|---|
+| 분석 | 경매물건카드 | `auction-property-card` | [⬇ auction-property-card.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-property-card.skill) |
+| 분석 | 경매종합분석 | `auction-analysis` | [⬇ auction-analysis.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-analysis.skill) |
+| 분석 | 입찰가산정 | `auction-bid-price` | [⬇ auction-bid-price.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-bid-price.skill) |
+| 분석 | 온비드공매조회 | `onbid-api-caller` | [⬇ onbid-api-caller.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/onbid-api-caller.skill) |
+| 분석 | 최우선변제판정 | `priority-payment-date-rule` | [⬇ priority-payment-date-rule.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/priority-payment-date-rule.skill) |
+| 분석 | 주거용경매 | `residential-auction` | [⬇ residential-auction.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/residential-auction.skill) |
+| 수집 | 신건 수집(09단원) | `court-newlist-collect` | [⬇ court-newlist-collect.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/court-newlist-collect.skill) |
+| 수집 | 사건 서류 받기(09단원) | `court-case-docs` | [⬇ court-case-docs.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/court-case-docs.skill) |
+| 산출물 | 숫자표기검증 | `number-format-guard` | [⬇ number-format-guard.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/number-format-guard.skill) |
+| 산출물 | 권리도표SVG | `auction-svg-chart` | [⬇ auction-svg-chart.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-svg-chart.skill) |
+| 산출물 | PPTX디자인규격 | `pptx-blue-design-system` | [⬇ pptx-blue-design-system.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/pptx-blue-design-system.skill) |
+
+**Cowork 에 넣는 법** — 둘 중 하나 `[검증필요 — 메뉴 이름은 앱 버전에 따라 다름 · 수강생 PC 실측 전]`
+
+| 방법 | 할 일 | 이렇게 되면 성공 |
+|---|---|---|
+| **가. 설정에서 올리기** | 데스크탑 앱 왼쪽 아래 내 이름 → **설정** → **기능(Capabilities)** 의 **스킬** → **업로드** → 받은 `.skill` 선택 | 스킬 목록에 이름이 생김 |
+| **나. 대화에 첨부** | Cowork 새 대화에 `.skill` 파일을 끌어다 놓고 `이 스킬 저장해줘` | 저장 확인 창 → 승인 |
+
+확인: 새 대화에서 「설치된 스킬 목록 보여줘」 → 넣은 이름이 나오면 성공. **같은 스킬을 두 방법으로 두 번 넣지 마세요.**
+
+> [!NOTE]
+> `.skill` 은 아래 표의 `.md`(또는 폴더)를 그대로 묶은 것입니다 — 내용이 같습니다(2026-10-06 판). `.md` 가 바뀌면 `.skill` 도 다시 만듭니다.
+> Code 탭으로 쓰는 분은 맨 아래 「설치 — Code 탭」을 따릅니다.
+
+---
+
 ## $\color{#d97757}{\textsf{분석 스킬 (6개)}}$
 
 | 파일 | 스킬 이름 (= 설치 폴더 이름) | 언제 쓰나 |
@@ -67,7 +102,7 @@
 
 ---
 
-## $\color{#d97757}{\textsf{설치 — Code 는 폴더에 파일로}}$
+## $\color{#d97757}{\textsf{설치 — Code 탭 (폴더에 파일로)}}$
 
 Claude Code(데스크탑 앱 Code 탭)는 스킬을 **`%USERPROFILE%\.claude\skills\<스킬 이름>\SKILL.md`** 로 읽습니다 `[확정 — 2026-09-30 실측]`.
 이 폴더의 `.md` 파일 9개는 **파일 이름이 한글**이지만, 설치할 때는 **스킬 이름(영문)으로 폴더를 만들고 그 안에 `SKILL.md` 로** 넣어야 합니다. 대응표는 [04단원 4절](../04_분석프로젝트.md).
