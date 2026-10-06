@@ -1,13 +1,13 @@
 # 스킬 모음 — 04단원 분석 프로젝트용
 
-[04단원](../04_분석프로젝트.md) 프로젝트가 물건을 분석할 때 꺼내 쓰는 **업무 매뉴얼 11개**입니다.
+[04단원](../04_분석프로젝트.md) 프로젝트가 물건을 분석할 때 꺼내 쓰는 **업무 매뉴얼 12개**입니다.
 프로젝트 지침이 「무엇을 지킬지」라면, 스킬은 「그 일을 어떤 순서로 할지」입니다.
 
 ## $\color{#d97757}{\textsf{⬇ 내려받기 — 이 화면에서 바로}}$
 
 아래 링크를 누르면 `.skill` 파일이 바로 내려받아집니다. **압축을 풀지 말고 `.skill` 파일 그대로** 씁니다.
 
-**한 번에 11개 →** [⬇ 스킬_11개_전체.zip](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/%EC%8A%A4%ED%82%AC_11%EA%B0%9C_%EC%A0%84%EC%B2%B4.zip) (이 zip 은 풀면 `.skill` 11개가 나옵니다. 그 `.skill` 들은 다시 풀지 않습니다)
+**한 번에 12개 →** [⬇ 스킬_12개_전체.zip](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/%EC%8A%A4%ED%82%AC_12%EA%B0%9C_%EC%A0%84%EC%B2%B4.zip) (이 zip 은 풀면 `.skill` 12개가 나옵니다. 그 `.skill` 들은 다시 풀지 않습니다)
 
 | 구분 | 스킬 | 스킬 이름 | 내려받기 |
 |---|---|---|---|
@@ -17,6 +17,7 @@
 | 분석 | 온비드공매조회 | `onbid-api-caller` | [⬇ onbid-api-caller.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/onbid-api-caller.skill) |
 | 분석 | 최우선변제판정 | `priority-payment-date-rule` | [⬇ priority-payment-date-rule.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/priority-payment-date-rule.skill) |
 | 분석 | 주거용경매 | `residential-auction` | [⬇ residential-auction.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/residential-auction.skill) |
+| 분석 | 실패사례점검 | `auction-failure-guard` | [⬇ auction-failure-guard.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-failure-guard.skill) |
 | 수집 | 신건 수집(09단원) | `court-newlist-collect` | [⬇ court-newlist-collect.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/court-newlist-collect.skill) |
 | 수집 | 사건 서류 받기(09단원) | `court-case-docs` | [⬇ court-case-docs.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/court-case-docs.skill) |
 | 산출물 | 숫자표기검증 | `number-format-guard` | [⬇ number-format-guard.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/number-format-guard.skill) |
@@ -38,7 +39,7 @@
 
 ---
 
-## $\color{#d97757}{\textsf{분석 스킬 (6개)}}$
+## $\color{#d97757}{\textsf{분석 스킬 (7개)}}$
 
 | 파일 | 스킬 이름 (= 설치 폴더 이름) | 언제 쓰나 |
 |---|---|---|
@@ -48,6 +49,7 @@
 | [스킬_온비드공매조회.md](스킬_온비드공매조회.md) | onbid-api-caller | 「온비드 공매 물건 찾아줘」 — 공매 물건·입찰결과 조회 규칙 |
 | [스킬_최우선변제판정.md](스킬_최우선변제판정.md) | priority-payment-date-rule | 소액임차인·최우선변제 판정 (기준일 = 최선순위 담보물권 설정일) |
 | [스킬_주거용경매.md](스킬_주거용경매.md) | residential-auction | 다가구·다세대·연립·아파트 |
+| [스킬_실패사례점검.md](스킬_실패사례점검.md) | auction-failure-guard | 「입찰 전 최종 점검해줘」 — 실패사례 11개 유형 점검표, 입찰 전·당일·허가결정 전/잔금 전 3게이트. 결론 전 마지막 게이트 |
 
 ## $\color{#d97757}{\textsf{수집 스킬 (2개) — 2026-09-29 추가 · 09단원}}$
 
@@ -80,7 +82,7 @@
 
 ---
 
-## $\color{#d97757}{\textsf{확신도 라벨 — 9개 스킬 공통 (2026-09-29 통일)}}$
+## $\color{#d97757}{\textsf{확신도 라벨 — 10개 스킬 공통 (2026-09-29 통일)}}$
 
 예전에는 스킬마다 라벨이 달랐습니다(`[출처확인]`·`[미확인]` 등). 지금은 **네 가지만** 씁니다.
 
@@ -105,11 +107,11 @@
 ## $\color{#d97757}{\textsf{설치 — Code 탭 (폴더에 파일로)}}$
 
 Claude Code(데스크탑 앱 Code 탭)는 스킬을 **`%USERPROFILE%\.claude\skills\<스킬 이름>\SKILL.md`** 로 읽습니다 `[확정 — 2026-09-30 실측]`.
-이 폴더의 `.md` 파일 9개는 **파일 이름이 한글**이지만, 설치할 때는 **스킬 이름(영문)으로 폴더를 만들고 그 안에 `SKILL.md` 로** 넣어야 합니다. 대응표는 [04단원 4절](../04_분석프로젝트.md).
+이 폴더의 `.md` 파일 10개는 **파일 이름이 한글**이지만, 설치할 때는 **스킬 이름(영문)으로 폴더를 만들고 그 안에 `SKILL.md` 로** 넣어야 합니다. 대응표는 [04단원 4절](../04_분석프로젝트.md).
 
 ### 방법 A — Claude 에게 시키기 (추천)
 
-Code 탭 세션(아무 폴더)에 [04단원 4절](../04_분석프로젝트.md)의 설치 프롬프트를 붙여 넣습니다. 9개를 한 번에 받아 폴더 이름까지 맞춰 저장합니다 `[검증필요 — 수강생 PC 실측 전]`.
+Code 탭 세션(아무 폴더)에 [04단원 4절](../04_분석프로젝트.md)의 설치 프롬프트를 붙여 넣습니다. 10개를 한 번에 받아 폴더 이름까지 맞춰 저장합니다 `[검증필요 — 수강생 PC 실측 전]`.
 
 ### 방법 B — 손으로
 
@@ -118,7 +120,7 @@ Code 탭 세션(아무 폴더)에 [04단원 4절](../04_분석프로젝트.md)�
 | **1** | 탐색기 주소창에 `%USERPROFILE%\.claude\skills` 를 입력해 연다 (없으면 만든다) |
 | **2** | 스킬 이름으로 폴더를 만든다 (예 `auction-property-card`) |
 | **3** | 위 표의 파일을 열고 **`Raw`** → 전체 복사 → 메모장에 붙여 그 폴더에 **`SKILL.md`** 로 저장 (UTF-8) |
-| **4** | 9개 반복. 새 세션에서 「설치된 스킬 목록 보여줘」 → 9개 이름이 나오면 성공 |
+| **4** | 10개 반복. 새 세션에서 「설치된 스킬 목록 보여줘」 → 10개 이름이 나오면 성공 |
 
 > [!IMPORTANT]
 > **전문을 그대로** 넣으세요. 맨 위 `---` 로 둘러싼 머리 부분(`name`, `description`)이 빠지면 스킬이 불리지 않습니다.
