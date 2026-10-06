@@ -24,10 +24,10 @@ VERIFY = os.path.join(os.path.expanduser("~"), ".claude", "hooks", "verify_prope
 
 CHECKLIST = f"""[물건 분석 필수 절차 — property_analysis_guard 1차 장치 · C:\\AI\\NPL\\CLAUDE.md ■ 두 관점 필수]
 아래를 하나도 빼지 않는다. 결론이 일찍 보여도(예: 대항력 인수로 포기 확실) 생략하지 않는다.
-1. 첫 동작 Skill 호출: npl-analysis → auction-property-card(용도별 residential/commercial/land/small-building 병행) → priority-payment-date-rule(임차인 있으면) → property-tax-apportionment(주택·근생 복합) → auction-bid-price → npl-svg-chart
+1. 첫 동작 Skill 호출: npl-analysis → auction-property-card(용도별 residential/commercial/land/small-building 병행) → priority-payment-date-rule(임차인 있으면) → property-tax-apportionment(주택·근생 복합) → auction-bid-price → npl-svg-chart → auction-failure-guard(결론 전 마지막)
 2. 서류: 매각물건명세서·건물/토지 등기(열람일 3개월 넘으면 재열람 요청)·건축물대장·감정평가서·현황조사서·문건접수 전수(채권양수 선점 체크)
 3. 두 관점: 관점 1 = 살 수 있는 채권 표(근저당·질권·LH·임차인 채권, 대부업법 §2) + 제3자 낙찰 배당 / 관점 2 = 직접 낙찰(채권 혼동·상계) + 총비용
-4. 판정: 당해세(원칙 13, 갑구 숫자 천원 단위) · 최우선변제(기준일=최선순위 담보물권) · STEP 4-C 선순위 조세 X · 21개 체크리스트 · Agent 0 저항지수
+4. 판정: 당해세(원칙 13, 갑구 숫자 천원 단위) · 최우선변제(기준일=최선순위 담보물권) · STEP 4-C 선순위 조세 X · 21개 체크리스트 · Agent 0 저항지수 · 실패위험 점검표(auction-failure-guard 11개 유형 — 관점 1 모드 B · 관점 2 모드 A, 재매각 이력이면 앞 낙찰자 실패 원인 맨 위)
 5. 시세·입지: 창고(C:\\AI\\경매창고.duckdb) 실거래 사다리 + 추정 감정가(원칙 24) + 전월세 중앙값(원칙 25) · 서울 정비사업 인접 체크 · 역세권(건설 중 노선 포함, STEP 5-B) · 인근 낙찰 사례(00_시장데이터)
 6. 세금 4종 개인·법인: 취득세 §19② 시가표준액 안분 · 재산세 · 종부세 2027/2028 개편안 · 출구세(시점 미지정이면 미산출) · 내 세대 보유주택 공시가격 합산(지침 🔴③) · 대출 판정(법인·규제지역 주택 0원) · ECOS 금리
 7. 산출물: PPTX(결론 두 관점 나란히·세금 3장↑·도표 3종·실명 대신 A씨·201호 + 관점 2 다섯 장 = 입지(수요처·통근) · 고유 리스크(확인 방법 열) · 명도(인도명령 일정·예산) · 종합 점수(100점 배점) · 확인해야 할 것) + 분석 엑셀(셀 수식) + NPL수익률 엑셀(npl-excel-fill-map, 템플릿 _템플릿\\NPL수익률_교육용.xlsx) + 00_물건카드.md

@@ -7,7 +7,7 @@
 
 필요: pip install python-pptx openpyxl
 검사 기준 = C:\\AI\\NPL\\CLAUDE.md ■ 이원 분석·두 관점·세금·대출·산출물 원칙
-           + npl-analysis / auction-property-card / npl-excel-fill-map 스킬 필수 항목
+           + npl-analysis / auction-property-card / npl-excel-fill-map 스킬 필수 항목 + auction-failure-guard 실패위험 점검표
 """
 import glob, os, re, sys
 
@@ -36,6 +36,7 @@ DECK_CHECKS = [
     ("선점", "채권양수 선점 체크", [r"선점"]),
     ("민감도", "민감도(감정가=추정·X·지연 등)", [r"민감도"]),
     ("확인사항", "확인해야 할 것(우선순위)", [r"확인"]),
+    ("실패점검", "실패위험 점검표(auction-failure-guard 11개 유형)", [r"실패\s*위험\s*점검표"]),
     # 관점 2 다섯 장 (2026-10-05)
     ("수요처", "입지 장 — 주요 수요처(대학·산업단지·업무지구) 직선거리", [r"수요처"]),
     ("고유리스크", "고유 리스크 장 — 「리스크 / 사실 / 영향 / 확인 방법」 표", [r"확인\s*방법"]),

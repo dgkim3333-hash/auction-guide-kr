@@ -64,6 +64,13 @@ try:
     ob = subprocess.run([sys.executable, V, b], capture_output=True).stdout.decode("utf-8", "replace")
     cases.append(("verify 다섯 장 없는 덱 → 4개 FAIL", all(f"[FAIL] {k}" in oa for k in ["명도", "종합점수", "수요처", "고유리스크"])))
     cases.append(("verify 다섯 장 있는 덱 → 4개 PASS", all(f"[PASS] {k}" in ob for k in ["명도", "종합점수", "수요처", "고유리스크"])))
+    # 2026-10-06 추가: 실패위험 점검표 검사
+    c, d = os.path.join(root, "c"), os.path.join(root, "d")
+    mk(c, "배당 순서"); mk(d, "배당 순서 · 실패위험 점검표")
+    oc = subprocess.run([sys.executable, V, c], capture_output=True).stdout.decode("utf-8", "replace")
+    od = subprocess.run([sys.executable, V, d], capture_output=True).stdout.decode("utf-8", "replace")
+    cases.append(("verify 점검표 없는 덱 → 실패점검 FAIL", "[FAIL] 실패점검" in oc))
+    cases.append(("verify 점검표 있는 덱 → 실패점검 PASS", "[PASS] 실패점검" in od))
     _sh.rmtree(root, ignore_errors=True)
 except ImportError:
     cases.append(("python-pptx 없음 — 검증기 시험 생략", False))
