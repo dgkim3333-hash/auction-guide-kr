@@ -1,0 +1,163 @@
+# 스킬 모음 — 04단원 분석 프로젝트용
+
+[04단원](../04_분석프로젝트.md) 프로젝트가 물건을 분석할 때 꺼내 쓰는 **업무 매뉴얼 13개**입니다.
+프로젝트 지침이 「무엇을 지킬지」라면, 스킬은 「그 일을 어떤 순서로 할지」입니다.
+
+## $\color{#d97757}{\textsf{⬇ 내려받기 — 이 화면에서 바로}}$
+
+아래 링크를 누르면 `.skill` 파일이 바로 내려받아집니다. **압축을 풀지 말고 `.skill` 파일 그대로** 씁니다.
+
+**한 번에 13개 →** [⬇ 스킬_13개_전체.zip](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/%EC%8A%A4%ED%82%AC_13%EA%B0%9C_%EC%A0%84%EC%B2%B4.zip) (이 zip 은 풀면 `.skill` 13개가 나옵니다. 그 `.skill` 들은 다시 풀지 않습니다)
+
+| 구분 | 스킬 | 스킬 이름 | 내려받기 |
+|---|---|---|---|
+| 분석 | 경매물건카드 | `auction-property-card` | [⬇ auction-property-card.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-property-card.skill) |
+| 분석 | 경매종합분석 | `auction-analysis` | [⬇ auction-analysis.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-analysis.skill) |
+| 분석 | 입찰가산정 | `auction-bid-price` | [⬇ auction-bid-price.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-bid-price.skill) |
+| 분석 | 온비드공매조회 | `onbid-api-caller` | [⬇ onbid-api-caller.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/onbid-api-caller.skill) |
+| 분석 | 최우선변제판정 | `priority-payment-date-rule` | [⬇ priority-payment-date-rule.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/priority-payment-date-rule.skill) |
+| 분석 | 주거용경매 | `residential-auction` | [⬇ residential-auction.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/residential-auction.skill) |
+| 분석 | 실패사례점검 | `auction-failure-guard` | [⬇ auction-failure-guard.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-failure-guard.skill) |
+| 수집 | 신건 수집(09단원) | `court-newlist-collect` | [⬇ court-newlist-collect.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/court-newlist-collect.skill) |
+| 수집 | 사건 서류 받기(09단원) | `court-case-docs` | [⬇ court-case-docs.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/court-case-docs.skill) |
+| 산출물 | 숫자표기검증 | `number-format-guard` | [⬇ number-format-guard.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/number-format-guard.skill) |
+| 산출물 | 권리도표SVG | `auction-svg-chart` | [⬇ auction-svg-chart.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/auction-svg-chart.skill) |
+| 산출물 | PPTX디자인규격 | `pptx-blue-design-system` | [⬇ pptx-blue-design-system.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/pptx-blue-design-system.skill) |
+| 산출물 | **덱 표준 (2026-10-08)** | `npl-deck-standard` | [⬇ npl-deck-standard.skill](https://github.com/dgkim3333-hash/auction-guide-kr/raw/main/skills/skill%ED%8C%8C%EC%9D%BC/npl-deck-standard.skill) — 물건카드 PPTX 모양·장 순서 표준(생성기·도표 견본, 가상 데이터) |
+
+**Cowork 에 넣는 법** — 둘 중 하나 `[검증필요 — 메뉴 이름은 앱 버전에 따라 다름 · 수강생 PC 실측 전]`
+
+| 방법 | 할 일 | 이렇게 되면 성공 |
+|---|---|---|
+| **가. 설정에서 올리기** | 데스크탑 앱 왼쪽 아래 내 이름 → **설정** → **기능(Capabilities)** 의 **스킬** → **업로드** → 받은 `.skill` 선택 | 스킬 목록에 이름이 생김 |
+| **나. 대화에 첨부** | Cowork 새 대화에 `.skill` 파일을 끌어다 놓고 `이 스킬 저장해줘` | 저장 확인 창 → 승인 |
+
+확인: 새 대화에서 「설치된 스킬 목록 보여줘」 → 넣은 이름이 나오면 성공. **같은 스킬을 두 방법으로 두 번 넣지 마세요.**
+
+> [!NOTE]
+> `.skill` 은 아래 표의 `.md`(또는 폴더)를 그대로 묶은 것입니다 — 내용이 같습니다(2026-10-07 판 — 숫자표기검증 · 입찰가산정 · 최우선변제판정 · 경매물건카드 갱신). `.md` 가 바뀌면 `.skill` 도 다시 만듭니다.
+> Code 탭으로 쓰는 분은 맨 아래 「설치 — Code 탭」을 따릅니다.
+
+---
+
+## $\color{#d97757}{\textsf{분석 스킬 (7개)}}$
+
+| 파일 | 스킬 이름 (= 설치 폴더 이름) | 언제 쓰나 |
+|---|---|---|
+| [스킬_경매물건카드.md](스킬_경매물건카드.md) | auction-property-card | 「이 물건 분석해줘」 — 서류 판독부터 물건카드 PPTX 까지 전체 |
+| [스킬_경매종합분석.md](스킬_경매종합분석.md) | auction-analysis | 권리·임차인·당해세·최우선변제·예상 배당·실거래가 낙찰가 예측·추정 감정가·전월세 교차검증 — 가장 깊은 분석 |
+| [스킬_입찰가산정.md](스킬_입찰가산정.md) | auction-bid-price | 「입찰가 범위 계산해줘」 — 경매·공매 판별, 저감률, 4단계 계산 |
+| [스킬_온비드공매조회.md](스킬_온비드공매조회.md) | onbid-api-caller | 「온비드 공매 물건 찾아줘」 — 공매 물건·입찰결과 조회 규칙 |
+| [스킬_최우선변제판정.md](스킬_최우선변제판정.md) | priority-payment-date-rule | 소액임차인·최우선변제 판정 (기준일 = 최선순위 담보물권 설정일) |
+| [스킬_주거용경매.md](스킬_주거용경매.md) | residential-auction | 다가구·다세대·연립·아파트 |
+| [스킬_실패사례점검.md](스킬_실패사례점검.md) | auction-failure-guard | 「입찰 전 최종 점검해줘」 — 실패사례 11개 유형 점검표, 입찰 전·당일·허가결정 전/잔금 전 3게이트. 결론 전 마지막 게이트 |
+
+## $\color{#d97757}{\textsf{수집 스킬 (2개) — 2026-09-29 추가 · 09단원}}$
+
+→ [09단원 — 법원경매정보 무료 경로](../09_법원경매정보_무료경로.md)
+
+유료 경매정보 사이트 없이 **법원경매정보(무료)** 로 02·06단원을 따라 할 때 씁니다. 폴더 안에 스크립트가 함께 있습니다.
+
+| 폴더 | 스킬 이름 | 언제 쓰나 | 함께 있는 파일 |
+|---|---|---|---|
+| [court-newlist-collect/](court-newlist-collect/SKILL.md) | court-newlist-collect | 서울·경기 15개 법원 **신건**을 JSON API로 모아 02단원 신건레이더 엑셀로 — 용도군 선택(기본 전체: 주거·업무상업·산업복합·토지, 2026-09-30) (월 1회 · 둘째 달부터 마스터에 없는 유찰 1회 포함) | `collect.js`(브라우저 콘솔용) · `build_rows.py`(원자료 변환) |
+| [court-case-docs/](court-case-docs/SKILL.md) | court-case-docs | 사건번호 하나 → 감정평가서·매각물건명세서·현황조사서(사진)·사건내역·기일내역·문건송달내역 PDF | `html_to_pdf.py`(화면 표 → A4 PDF) |
+
+> [!NOTE]
+> 두 스킬은 **파일이 여러 개**입니다. 폴더를 통째로 `%USERPROFILE%\.claude\skills\` 에 복사합니다. 방법은 아래 「여러 파일짜리」.
+> 모든 `[확정]` 값은 **2026-09-29 실측**이며 사이트가 바뀌면 깨집니다.
+
+## $\color{#d97757}{\textsf{산출물 스킬 (3개) — 2026-09-29 추가}}$
+
+분석 결과를 **숫자·그림·슬라이드로 옮길 때** 함께 켜집니다. 분석 스킬과 같이 쓰세요.
+
+| 파일 | 스킬 이름 | 언제 쓰나 |
+|---|---|---|
+| [스킬_숫자표기검증.md](스킬_숫자표기검증.md) | number-format-guard | 엑셀·문서·슬라이드에 숫자를 쓸 때 **항상**. 원 단위 풀 콤마, 억·만 축약 금지, 비율 옆 금액 병기 |
+| [스킬_권리도표SVG.md](스킬_권리도표SVG.md) | auction-svg-chart | 권리 순위 사다리·문건 타임라인·배당 폭포를 그릴 때. 당해세·최우선변제 주황 배지 |
+| [스킬_PPTX디자인규격.md](스킬_PPTX디자인규격.md) | pptx-blue-design-system | PPTX 덱을 만들 때. 16:9 5존 좌표·블루 팔레트·`㎡` 금지 |
+| [NPL/skills/npl-deck-standard/](../NPL/skills/npl-deck-standard/README.md) (폴더) | npl-deck-standard | **물건카드 PPTX를 만들 때 항상.** 규격·장 순서·검산·완료 전 검사 + 생성기·도표 견본(가상 데이터). `pptx-blue-design-system` 보다 우선 (2026-10-08) |
+
+> [!NOTE]
+> 네 스킬은 **분석 내용을 바꾸지 않습니다.** 표기·그림·서식만 정합니다.
+> 「숫자표기검증」은 다른 모든 규격보다 우선합니다.
+
+---
+
+## $\color{#d97757}{\textsf{확신도 라벨 — 10개 스킬 공통 (2026-09-29 통일)}}$
+
+예전에는 스킬마다 라벨이 달랐습니다(`[출처확인]`·`[미확인]` 등). 지금은 **네 가지만** 씁니다.
+
+| 라벨 | 뜻 |
+|---|---|
+| `[확정]` | 그 답변에서 원문·공식 출처로 직접 확인함. 출처와 조회일을 제시할 수 있음 |
+| `[검증필요]` | 아직 원문으로 확인 못 함. 기억·간접 검색·이전 대화에 의존한 값 |
+| `[추정]` | 통계·계수·가정으로 만든 예측. 사실이 아님 |
+| `[정보부족]` | 확인하려 했으나 공개되지 않아 얻을 수 없음. **사유를 함께 적음** |
+
+> [!IMPORTANT]
+> **`[정보부족]` 은 「확인할 수 없었다」는 뜻이지 「안 했다」는 뜻이 아닙니다.**
+> 도구로 서너 번 조회하면 되는 것, 파일 하나만 올리면 되는 것에 이 라벨이 붙어 있으면
+> 「그건 조회하면 되잖아」라고 되물으세요. 가장 흔한 실패 유형입니다.
+
+> [!NOTE]
+> 예전 버전 스킬을 이미 설치하셨다면 **지우고 다시 설치**하세요.
+> 라벨이 섞이면 어느 값이 확인된 것인지 구분이 안 됩니다.
+
+---
+
+## $\color{#d97757}{\textsf{설치 — Code 탭 (폴더에 파일로)}}$
+
+Claude Code(데스크탑 앱 Code 탭)는 스킬을 **`%USERPROFILE%\.claude\skills\<스킬 이름>\SKILL.md`** 로 읽습니다 `[확정 — 2026-09-30 실측]`.
+이 폴더의 `.md` 파일 10개는 **파일 이름이 한글**이지만, 설치할 때는 **스킬 이름(영문)으로 폴더를 만들고 그 안에 `SKILL.md` 로** 넣어야 합니다. 대응표는 [04단원 4절](../04_분석프로젝트.md).
+
+### 방법 A — Claude 에게 시키기 (추천)
+
+Code 탭 세션(아무 폴더)에 [04단원 4절](../04_분석프로젝트.md)의 설치 프롬프트를 붙여 넣습니다. 10개를 한 번에 받아 폴더 이름까지 맞춰 저장합니다 `[검증필요 — 수강생 PC 실측 전]`.
+
+### 방법 B — 손으로
+
+| 순서 | 할 일 |
+|---|---|
+| **1** | 탐색기 주소창에 `%USERPROFILE%\.claude\skills` 를 입력해 연다 (없으면 만든다) |
+| **2** | 스킬 이름으로 폴더를 만든다 (예 `auction-property-card`) |
+| **3** | 위 표의 파일을 열고 **`Raw`** → 전체 복사 → 메모장에 붙여 그 폴더에 **`SKILL.md`** 로 저장 (UTF-8) |
+| **4** | 10개 반복. 새 세션에서 「설치된 스킬 목록 보여줘」 → 10개 이름이 나오면 성공 |
+
+> [!IMPORTANT]
+> **전문을 그대로** 넣으세요. 맨 위 `---` 로 둘러싼 머리 부분(`name`, `description`)이 빠지면 스킬이 불리지 않습니다.
+> **백업은 `skills\` 밖에** 둡니다. `skills\` 안의 폴더는 이름에 `_old` 를 붙여도 전부 스킬로 읽혀 중복으로 뜹니다 `[확정 — 2026-09-30 실측]`.
+
+### 여러 파일짜리 (court-newlist-collect · court-case-docs)
+
+폴더 이름이 이미 스킬 이름이므로 **폴더를 통째로** `%USERPROFILE%\.claude\skills\` 에 복사합니다. 저장소 첫 화면 **`<> Code` → `Download ZIP`** 으로 받아 풀면 `skills\court-newlist-collect\` 가 그대로 있습니다. 09단원 3절.
+
+> [!NOTE]
+> Cowork·웹에서 쓰던 「대화로 저장」·`.skill` 올리기는 Code 에서는 쓰지 않습니다. 두 방법으로 같은 스킬을 이중 설치하지 마세요.
+
+---
+
+## $\color{#d97757}{\textsf{함께 필요한 것}}$
+
+| 스킬 | 필요한 연결 |
+|---|---|
+| 경매물건카드 | 국토부 실거래가·지도 조회용 MCP — [필요한MCP.md](https://github.com/dgkim3333-hash/claude-guide-kr/blob/main/경매물건분석/필요한MCP.md) |
+| 온비드공매조회 | 공공데이터포털 인증키(온비드 서비스 활용신청) + 온비드 도구가 있는 MCP |
+| 입찰가산정 | 없어도 됩니다. [03단원](../03_DuckDB_데이터창고.md) 창고에 낙찰 결과가 있으면 그것을 먼저 씁니다 |
+| 권리도표SVG | 없어도 됩니다. 파이썬 `cairosvg` 만 설치하면 됩니다 |
+| court-newlist-collect | Claude in Chrome(01단원) · Excel MCP(02단원) · 법원경매정보 자동 다운로드 허용(01단원 3단계) |
+| court-case-docs | Claude in Chrome · 파이썬 `weasyprint` · 폰트 Noto Sans CJK KR |
+| 숫자표기검증 · PPTX디자인규격 | 없어도 됩니다 |
+
+---
+
+## $\color{#d97757}{\textsf{알아둘 것}}$
+
+- **입찰가산정 스킬의 계수는 강사가 특정 지역·기간 표본으로 뽑은 참고값 `[추정]` 입니다.** 그대로 입찰가로 쓰지 마세요.
+- 스킬은 **판단 재료**를 만들 뿐입니다. 특정 물건의 입찰을 권하지 않습니다.
+- **법원경매정보에서 받은 목록·서류는 개인 검토용입니다.** 남에게 나눠 주거나 인터넷에 올리지 마세요(09단원 7절 이용약관 요약).
+- 세율·한도·법령 수치는 스킬에 적혀 있어도 **답변할 때마다 원문으로 확인**해야 합니다.
+- **법원 감정가를 그대로 믿지 마세요.** 경매종합분석 11절·물건카드 STEP 5-2 의 추정 감정가와 나란히 놓고 봅니다.
+- **대출은 판정부터 하세요.** 「낙찰가의 80%」는 규제지역·차주에 따라 0원이 될 수 있습니다.
+- 어디서든 같아야 하는 규칙(라벨·금액 표기·금지 소스)은 [07단원 개인 설정](../07_개인설정.md) 에 넣어 두면 스킬이 없어도 지켜집니다.
+- AI 분석은 검토 출발점입니다. 실제 입찰 전 등기부·매각물건명세서 원문과 전문가 확인이 필요합니다.
