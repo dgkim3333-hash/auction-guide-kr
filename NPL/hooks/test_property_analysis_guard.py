@@ -71,6 +71,17 @@ try:
     od = subprocess.run([sys.executable, V, d], capture_output=True).stdout.decode("utf-8", "replace")
     cases.append(("verify 점검표 없는 덱 → 실패점검 FAIL", "[FAIL] 실패점검" in oc))
     cases.append(("verify 점검표 있는 덱 → 실패점검 PASS", "[PASS] 실패점검" in od))
+    # 2026-10-09 추가: 당해 연도 당해세 · 계약 마감 · 부록 D
+    e, f = os.path.join(root, "e"), os.path.join(root, "f")
+    mk(e, "배당 순서 · 계약일 확인"); mk(f, "당해 연도 당해세 산출 · 계약일 체크리스트 · 잔금일 체크리스트 · 부록 D — 자금 계획")
+    oe = subprocess.run([sys.executable, V, e], capture_output=True).stdout.decode("utf-8", "replace")
+    of = subprocess.run([sys.executable, V, f], capture_output=True).stdout.decode("utf-8", "replace")
+    cases.append(("verify 새 장 없는 덱 → 3개 FAIL", all(f"[FAIL] {k}" in oe for k in ["당해연도당해세", "계약마감", "자금계획"])))
+    cases.append(("verify 새 장 있는 덱 → 3개 PASS", all(f"[PASS] {k}" in of for k in ["당해연도당해세", "계약마감", "자금계획"])))
+    g = os.path.join(root, "g"); mk(g, "배당 순서")
+    open(os.path.join(g, "_검증예외.md"), "w", encoding="utf-8").write("- 계약마감: 직접 낙찰 건\n- 자금계획: 직접 낙찰 건\n")
+    og = subprocess.run([sys.executable, V, g], capture_output=True).stdout.decode("utf-8", "replace")
+    cases.append(("verify 직접 낙찰 예외 사유 → 계약마감·자금계획 WAIVED", all(f"[WAIVED] {k}" in og for k in ["계약마감", "자금계획"])))
     _sh.rmtree(root, ignore_errors=True)
 except ImportError:
     cases.append(("python-pptx 없음 — 검증기 시험 생략", False))

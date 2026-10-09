@@ -8,6 +8,7 @@
 필요: pip install python-pptx openpyxl
 검사 기준 = C:\\AI\\NPL\\CLAUDE.md ■ 이원 분석·두 관점·세금·대출·산출물 원칙
            + npl-analysis / auction-property-card / npl-excel-fill-map 스킬 필수 항목 + auction-failure-guard 실패위험 점검표
+           + npl-tax-arrears-closing 당해 연도 당해세 · 계약 마감 체크리스트 · 부록 D (2026-10-09)
 """
 import glob, os, re, sys
 
@@ -42,6 +43,10 @@ DECK_CHECKS = [
     ("고유리스크", "고유 리스크 장 — 「리스크 / 사실 / 영향 / 확인 방법」 표", [r"확인\s*방법"]),
     ("명도", "명도 장 — 인도명령 일정·예산", [r"인도명령"]),
     ("종합점수", "종합 점수 장 — 100점 배점표(관점 2)", [r"배점"]),
+    # 2026-10-09 — npl-tax-arrears-closing (계약 마감·부록 D는 채권 매입 건만: 직접 낙찰 건은 _검증예외.md 에 사유)
+    ("당해연도당해세", "당해 연도 당해세 산출 장 — 재산세·종부세 각각 + 합계", [r"당해\s*연도"]),
+    ("계약마감", "계약일·잔금일 체크리스트(채권 매입 건)", [r"계약일\s*체크리스트", r"잔금일\s*체크리스트"]),
+    ("자금계획", "부록 D — 자금 계획(채권 매입 건)", [r"부록\s*D|자금\s*계획"]),
 ]
 ABBR = re.compile(r"\d[\d,.]*\s*(?:억|만\s*원|조\s*원)")
 
